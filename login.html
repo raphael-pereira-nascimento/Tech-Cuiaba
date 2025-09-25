@@ -17,7 +17,7 @@
     <div class="auth-card">
       <div class="auth-header">
         <h2>Login</h2>
-        <p>Acesse sua conta</p>
+        <p>Acesse sua conta no TechCuiabá</p>
       </div>
       <form id="loginForm">
         <div class="form-group">
@@ -26,7 +26,7 @@
         </div>
         <div class="form-group">
           <label for="loginPassword">Senha</label>
-          <input type="password" id="loginPassword" class="form-control" required>
+          <input type="password" id="loginPassword" class="form-control" required minlength="6">
         </div>
         <button type="submit" class="btn-primary">Entrar</button>
       </form>
@@ -36,6 +36,49 @@
     </div>
   </div>
 
+  <!-- Toast para login (opcional) -->
+  <div id="toast" class="toast">
+    <div class="toast-content">
+      <span class="material-symbols-outlined">check_circle</span>
+      <span>Login realizado com sucesso!</span>
+    </div>
+  </div>
+
   <script src="script.js"></script>
+  <script>
+    // Login form validation
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const email = document.getElementById('loginEmail');
+      const password = document.getElementById('loginPassword');
+      const toast = document.getElementById('toast');
+      
+      let isValid = true;
+      
+      if (!email.value.trim() || !email.value.includes('@')) {
+        email.classList.add('error');
+        isValid = false;
+      } else {
+        email.classList.remove('error');
+      }
+      
+      if (password.value.length < 6) {
+        password.classList.add('error');
+        isValid = false;
+      } else {
+        password.classList.remove('error');
+      }
+      
+      if (isValid) {
+        // Show toast
+        toast.classList.add('show');
+        setTimeout(() => {
+          toast.classList.remove('show');
+          // window.location.href = 'index.html';
+        }, 3000);
+      }
+    });
+  </script>
 </body>
 </html>
