@@ -17,7 +17,7 @@
     <div class="auth-card">
       <div class="auth-header">
         <h2>Cadastro</h2>
-        <p>Crie sua conta gratuita</p>
+        <p>Crie sua conta para o TechCuiabá 2024</p>
       </div>
       <form id="cadastroForm">
         <div class="form-group">
@@ -29,8 +29,12 @@
           <input type="email" id="cadastroEmail" class="form-control" required>
         </div>
         <div class="form-group">
+          <label for="cadastroInstituicao">Instituição/Empresa (Opcional)</label>
+          <input type="text" id="cadastroInstituicao" class="form-control">
+        </div>
+        <div class="form-group">
           <label for="cadastroPassword">Senha</label>
-          <input type="password" id="cadastroPassword" class="form-control" required>
+          <input type="password" id="cadastroPassword" class="form-control" required minlength="6">
         </div>
         <div class="form-group">
           <label for="cadastroConfirmPassword">Confirmar Senha</label>
@@ -44,29 +48,39 @@
     </div>
   </div>
 
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">
+    <div class="toast-content">
+      <span class="material-symbols-outlined">check_circle</span>
+      <span>Cadastro realizado com sucesso! Bem-vindo ao TechCuiabá!</span>
+    </div>
+  </div>
+
   <script src="script.js"></script>
   <script>
-    // Cadastro form validation
+    // Cadastro form validation and toast
     document.getElementById('cadastroForm').addEventListener('submit', function(e) {
       e.preventDefault();
+      
       const nome = document.getElementById('cadastroNome');
       const email = document.getElementById('cadastroEmail');
       const password = document.getElementById('cadastroPassword');
       const confirmPassword = document.getElementById('cadastroConfirmPassword');
-      
-      let isValid = true;
+      const toast = document.getElementById('toast');
       
       // Clear previous errors
       [nome, email, password, confirmPassword].forEach(field => {
         field.classList.remove('error');
       });
       
-      if (!nome.value) {
+      let isValid = true;
+      
+      if (!nome.value.trim()) {
         nome.classList.add('error');
         isValid = false;
       }
       
-      if (!email.value || !email.value.includes('@')) {
+      if (!email.value.trim() || !email.value.includes('@')) {
         email.classList.add('error');
         isValid = false;
       }
@@ -82,7 +96,18 @@
       }
       
       if (isValid) {
-        alert('Cadastro realizado com sucesso!');
+        // Show toast
+        toast.classList.add('show');
+        
+        // Hide toast after 3 seconds
+        setTimeout(() => {
+          toast.classList.remove('show');
+          // Optionally redirect to home after successful registration
+          // window.location.href = 'index.html';
+        }, 3000);
+        
+        // Reset form
+        this.reset();
       }
     });
   </script>

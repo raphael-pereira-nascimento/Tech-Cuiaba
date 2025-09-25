@@ -37,32 +37,5 @@
   </div>
 
   <script src="script.js"></script>
-  <script>
-    // Login form validation
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const email = document.getElementById('loginEmail');
-      const password = document.getElementById('loginPassword');
-      
-      let isValid = true;
-      if (!email.value || !email.value.includes('@')) {
-        email.classList.add('error');
-        isValid = false;
-      } else {
-        email.classList.remove('error');
-      }
-      
-      if (password.value.length < 6) {
-        password.classList.add('error');
-        isValid = false;
-      } else {
-        password.classList.remove('error');
-      }
-      
-      if (isValid) {
-        alert('Login realizado com sucesso!');
-      }
-    });
-  </script>
 </body>
 </html>
