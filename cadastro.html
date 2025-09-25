@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cadastro - TechCuiabá</title>
+  <link rel="stylesheet" href="cadastro.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+</head>
+<body>
+  <button class="theme-toggle" id="themeToggle">
+    <span class="material-symbols-outlined">light_mode</span>
+  </button>
+
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <h2>Cadastro</h2>
+        <p>Crie sua conta gratuita</p>
+      </div>
+      <form id="cadastroForm">
+        <div class="form-group">
+          <label for="cadastroNome">Nome Completo</label>
+          <input type="text" id="cadastroNome" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="cadastroEmail">E-mail</label>
+          <input type="email" id="cadastroEmail" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="cadastroPassword">Senha</label>
+          <input type="password" id="cadastroPassword" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="cadastroConfirmPassword">Confirmar Senha</label>
+          <input type="password" id="cadastroConfirmPassword" class="form-control" required>
+        </div>
+        <button type="submit" class="btn-primary">Cadastrar</button>
+      </form>
+      <div class="auth-footer">
+        <p>Já tem conta? <a href="login.html">Faça login</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // Cadastro form validation
+    document.getElementById('cadastroForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const nome = document.getElementById('cadastroNome');
+      const email = document.getElementById('cadastroEmail');
+      const password = document.getElementById('cadastroPassword');
+      const confirmPassword = document.getElementById('cadastroConfirmPassword');
+      
+      let isValid = true;
+      
+      // Clear previous errors
+      [nome, email, password, confirmPassword].forEach(field => {
+        field.classList.remove('error');
+      });
+      
+      if (!nome.value) {
+        nome.classList.add('error');
+        isValid = false;
+      }
+      
+      if (!email.value || !email.value.includes('@')) {
+        email.classList.add('error');
+        isValid = false;
+      }
+      
+      if (password.value.length < 6) {
+        password.classList.add('error');
+        isValid = false;
+      }
+      
+      if (password.value !== confirmPassword.value) {
+        confirmPassword.classList.add('error');
+        isValid = false;
+      }
+      
+      if (isValid) {
+        alert('Cadastro realizado com sucesso!');
+      }
+    });
+  </script>
+</body>
+</html>
