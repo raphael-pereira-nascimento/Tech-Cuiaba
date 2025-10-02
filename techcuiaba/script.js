@@ -1,35 +1,33 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Armazenar dados do usuário
-  let usuarioAtual = null;
+  // Estado do usuário
+  let usuarioAtual = {
+    nome: "Visitante",
+    email: "Não cadastrado",
+    inscrito: false,
+  };
 
-  // Elementos da interface
-  const userNameElement = document.querySelector(".user-name");
-  const userEmailElement = document.querySelector(".user-email");
-  const contaUserName = document.getElementById("userName");
-  const contaUserEmail = document.getElementById("userEmail");
-  const contaStatus = document.querySelector(".account-status");
+  // Elementos DOM
+  const userNameDisplay = document.getElementById("userNameDisplay");
+  const userEmailDisplay = document.getElementById("userEmailDisplay");
+  const contaUserName = document.getElementById("contaUserName");
+  const contaUserEmail = document.getElementById("contaUserEmail");
+  const contaStatus = document.getElementById("contaStatus");
 
   // Função para atualizar todos os elementos da interface
-  function atualizarInterfaceUsuario() {
-    if (usuarioAtual) {
-      // Atualizar header
-      if (userNameElement) userNameElement.textContent = usuarioAtual.nome;
-      if (userEmailElement) userEmailElement.textContent = usuarioAtual.email;
+  function atualizarInterface() {
+    // Atualizar header
+    if (userNameDisplay) userNameDisplay.textContent = usuarioAtual.nome;
+    if (userEmailDisplay) userEmailDisplay.textContent = usuarioAtual.email;
 
-      // Atualizar modal de conta
-      if (contaUserName) contaUserName.textContent = usuarioAtual.nome;
-      if (contaUserEmail) contaUserEmail.textContent = usuarioAtual.email;
-      if (contaStatus) {
+    // Atualizar modal de conta
+    if (contaUserName) contaUserName.textContent = usuarioAtual.nome;
+    if (contaUserEmail) contaUserEmail.textContent = usuarioAtual.email;
+
+    if (contaStatus) {
+      if (usuarioAtual.inscrito) {
         contaStatus.textContent = "Confirmada ✓";
         contaStatus.style.color = "#10b981";
-      }
-    } else {
-      // Valores padrão
-      if (userNameElement) userNameElement.textContent = "Visitante";
-      if (userEmailElement) userEmailElement.textContent = "Não cadastrado";
-      if (contaUserName) contaUserName.textContent = "Visitante";
-      if (contaUserEmail) contaUserEmail.textContent = "Não cadastrado";
-      if (contaStatus) {
+      } else {
         contaStatus.textContent = "Não inscrito";
         contaStatus.style.color = "#ef4444";
       }
@@ -49,24 +47,38 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Abrir modal de cadastro
-  const openCadastro = document.getElementById("openCadastro");
-  if (openCadastro) {
-    openCadastro.addEventListener("click", function () {
+  // Modal de cadastro - abrir
+  const openCadastroBtns = document.querySelectorAll('[id^="openCadastroBtn"]');
+  openCadastroBtns.forEach((btn) => {
+    btn.addEventListener("click", function () {
       document.getElementById("cadastroModal").style.display = "flex";
+    });
+  });
+
+  // Modal de conta - abrir
+  const openAccountBtn = document.getElementById("openAccountBtn");
+  if (openAccountBtn) {
+    openAccountBtn.addEventListener("click", function () {
+      atualizarInterface();
+      document.getElementById("contaModal").style.display = "flex";
     });
   }
 
-  // Fechar modais ao clicar no botão de fechar
-  const closeButtons = document.querySelectorAll(".close-modal");
-  closeButtons.forEach((button) => {
-    button.addEventListener("click", function () {
-      const modal = this.closest(".modal");
-      if (modal) {
-        modal.style.display = "none";
-      }
+  // Fechar modais
+  const closeCadastroModal = document.getElementById("closeCadastroModal");
+  const closeContaModal = document.getElementById("closeContaModal");
+
+  if (closeCadastroModal) {
+    closeCadastroModal.addEventListener("click", function () {
+      document.getElementById("cadastroModal").style.display = "none";
     });
-  });
+  }
+
+  if (closeContaModal) {
+    closeContaModal.addEventListener("click", function () {
+      document.getElementById("contaModal").style.display = "none";
+    });
+  }
 
   // Fechar modais ao clicar fora
   const modals = document.querySelectorAll(".modal");
@@ -91,24 +103,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
       let isValid = true;
 
-      // Resetar bordas
+      // Resetar estilos de erro
       [nome, email, password].forEach((field) => {
         if (field) field.style.borderColor = "";
       });
 
       // Validação
-      if (!nome.value.trim()) {
-        nome.style.borderColor = "#ef4444";
+      if (!nome || !nome.value.trim()) {
+        if (nome) nome.style.borderColor = "#ef4444";
         isValid = false;
       }
 
-      if (!email.value.trim() || !email.value.includes("@")) {
-        email.style.borderColor = "#ef4444";
+      if (!email || !email.value.trim() || !email.value.includes("@")) {
+        if (email) email.style.borderColor = "#ef4444";
         isValid = false;
       }
 
-      if (password.value.length < 6) {
-        password.style.borderColor = "#ef4444";
+      if (!password || password.value.length < 6) {
+        if (password) password.style.borderColor = "#ef4444";
         isValid = false;
       }
 
@@ -117,10 +129,11 @@ document.addEventListener("DOMContentLoaded", function () {
         usuarioAtual = {
           nome: nome.value.trim(),
           email: email.value.trim(),
+          inscrito: true,
         };
 
         // Atualizar toda a interface
-        atualizarInterfaceUsuario();
+        atualizarInterface();
 
         // Mostrar toast
         if (toast) {
@@ -136,16 +149,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
-
-  // Abrir modal de conta
-  const accountButtons = document.querySelectorAll(".account-icon-btn");
-  accountButtons.forEach((button) => {
-    button.addEventListener("click", function (e) {
-      e.preventDefault();
-      atualizarInterfaceUsuario(); // Atualizar antes de mostrar
-      document.getElementById("contaModal").style.display = "flex";
-    });
-  });
 
   // Navegação suave
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
@@ -168,5 +171,5 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Inicializar interface
-  atualizarInterfaceUsuario();
+  atualizarInterface();
 });
