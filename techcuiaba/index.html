@@ -267,12 +267,37 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
+<!-- Modal de Cadastro -->
+<div id="cadastroModal" class="modal">
+  <div class="modal-content">
+    <button class="close-modal">&times;</button>
+    <div class="modal-header">
+      <h2>Cadastro - TechCuiabá</h2>
+    </div>
+    <form id="cadastroForm">
+      <div class="form-group">
+        <label for="cadastroNome">Nome Completo</label>
+        <input type="text" id="cadastroNome" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="cadastroEmail">E-mail</label>
+        <input type="email" id="cadastroEmail" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="cadastroPassword">Senha</label>
+        <input type="password" id="cadastroPassword" class="form-control" required minlength="6">
+      </div>
+      <button type="submit" class="btn-submit">Cadastrar</button>
+    </form>
+  </div>
+</div>
+
 <!-- Modal de Conta -->
 <div id="contaModal" class="modal">
   <div class="modal-content">
+    <button class="close-modal">&times;</button>
     <div class="modal-header">
       <h2>Minha Conta</h2>
-      <button class="close-modal close-account-modal">&times;</button>
     </div>
     <div class="account-content">
       <div class="user-info">
@@ -297,7 +322,7 @@ document.addEventListener('DOMContentLoaded', function() {
           <span class="material-symbols-outlined">calendar_month</span>
           <div>
             <strong>Data:</strong><br>
-            15 de Novembro de 2025
+            15 de Novembro de 2024
           </div>
         </div>
         <div class="detail-item">
@@ -324,6 +349,13 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
     </div>
   </div>
+</div>
+
+<!-- Toast Notification -->
+<div id="toast" class="toast">
+  <span class="material-symbols-outlined">check_circle</span>
+  <span>Cadastro realizado com sucesso!</span>
+</div>
 </div>
 </body>
 </html>
