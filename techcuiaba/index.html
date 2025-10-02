@@ -21,6 +21,13 @@
         </ul>
       </nav>
       <div class="header-right">
+        <div class="account-display">
+          <span class="user-name">Visitante</span>
+          <span class="user-email">Não cadastrado</span>
+        </div>
+        <button class="account-icon-btn" title="Minha Conta">
+          <span class="material-symbols-outlined">account_circle</span>
+        </button>
         <button class="theme-toggle" id="themeToggle">
           <span class="material-symbols-outlined">light_mode</span>
         </button>
@@ -77,7 +84,7 @@
       <h2 class="section-title">Nossos Eventos</h2>
       <div class="events-grid">
         <div class="event-card">
-          <img src="../img/amp-Cuiaba-Imagem-Iphan-2.jpg" alt="Centro Histórico de Cuiabá">
+          <img src="../img/1759244029.png" alt="Centro Histórico de Cuiabá">
           <div class="event-info">
             <h3>TechCuiabá Summit 2024</h3>
             <p>Evento principal com palestras internacionais no coração de Cuiabá.</p>
@@ -160,5 +167,163 @@
   </footer>
 
   <script src="script.js"></script>
+  <!-- Modal de Conta -->
+<div id="contaModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Minha Conta</h2>
+      <button class="close-modal" onclick="document.getElementById('contaModal').style.display='none'">&times;</button>
+    </div>
+    <div class="account-content">
+      <div class="user-info">
+        <h3>Dados do Participante</h3>
+        <div class="detail-item">
+          <strong>Nome:</strong> 
+        </div>
+        <div class="detail-item">
+          <strong>E-mail:</strong> 
+        </div>
+        <div class="detail-item">
+          <strong>Instituição:</strong> Universidade Federal de Mato Grosso
+        </div>
+        <div class="detail-item">
+          <strong>Status:</strong> <span style="color: #10b981;">Confirmada ✓</span>
+        </div>
+      </div>
+      
+      <div class="event-info">
+        <h3>TechCuiabá Summit 2025</h3>
+        <div class="detail-item">
+          <span class="material-symbols-outlined">calendar_month</span>
+          <strong>Data:</strong> 15 de Novembro de 2024
+        </div>
+        <div class="detail-item">
+          <span class="material-symbols-outlined">schedule</span>
+          <strong>Horário:</strong> 08:00 - 18:00
+        </div>
+        <div class="detail-item">
+          <span class="material-symbols-outlined">location_on</span>
+          <strong>Local:</strong> Centro de Convenções de Cuiabá
+        </div>
+        <div class="detail-item">
+          <span class="material-symbols-outlined">confirmation_number</span>
+          <strong>Código:</strong> TCB2024-789456
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Estilos adicionais para o modal de conta */
+.account-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.user-info, .event-info {
+  background: var(--secondary-color);
+  padding: 1rem;
+  border-radius: var(--radius);
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.detail-item .material-symbols-outlined {
+  color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+  .account-content {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+<script>
+// Adicionar ao final do script.js existente
+document.addEventListener('DOMContentLoaded', function() {
+  // Adicionar evento de clique ao ícone de conta
+  const accountIcons = document.querySelectorAll('.account-icon');
+  accountIcons.forEach(icon => {
+    icon.addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('contaModal').style.display = 'flex';
+    });
+  });
+
+  // Fechar modal ao clicar fora
+  window.addEventListener('click', function(event) {
+    const modal = document.getElementById('contaModal');
+    if (modal && event.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+});
+</script>
+<!-- Modal de Conta -->
+<div id="contaModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Minha Conta</h2>
+      <button class="close-modal close-account-modal">&times;</button>
+    </div>
+    <div class="account-content">
+      <div class="user-info">
+        <h3>Dados do Participante</h3>
+        <div class="detail-item">
+          <strong>Nome:</strong> <span id="userName">Visitante</span>
+        </div>
+        <div class="detail-item">
+          <strong>E-mail:</strong> <span id="userEmail">Não cadastrado</span>
+        </div>
+        <div class="detail-item">
+          <strong>Instituição:</strong> Universidade Federal de Mato Grosso
+        </div>
+        <div class="detail-item">
+          <strong>Status:</strong> <span class="account-status">Não inscrito</span>
+        </div>
+      </div>
+      
+      <div class="event-info">
+        <h3>TechCuiabá Summit 2024</h3>
+        <div class="detail-item">
+          <span class="material-symbols-outlined">calendar_month</span>
+          <div>
+            <strong>Data:</strong><br>
+            15 de Novembro de 2025
+          </div>
+        </div>
+        <div class="detail-item">
+          <span class="material-symbols-outlined">schedule</span>
+          <div>
+            <strong>Horário:</strong><br>
+            08:00 - 18:00
+          </div>
+        </div>
+        <div class="detail-item">
+          <span class="material-symbols-outlined">location_on</span>
+          <div>
+            <strong>Local:</strong><br>
+            Centro de Convenções de Cuiabá
+          </div>
+        </div>
+        <div class="detail-item">
+          <span class="material-symbols-outlined">confirmation_number</span>
+          <div>
+            <strong>Código:</strong><br>
+            TCB2024-789456
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>

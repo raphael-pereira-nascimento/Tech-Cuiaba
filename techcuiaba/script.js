@@ -1,4 +1,41 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // Armazenar dados do usuário
+  let usuarioAtual = null;
+
+  // Elementos da interface
+  const userNameElement = document.querySelector(".user-name");
+  const userEmailElement = document.querySelector(".user-email");
+  const contaUserName = document.getElementById("userName");
+  const contaUserEmail = document.getElementById("userEmail");
+  const contaStatus = document.querySelector(".account-status");
+
+  // Função para atualizar todos os elementos da interface
+  function atualizarInterfaceUsuario() {
+    if (usuarioAtual) {
+      // Atualizar header
+      if (userNameElement) userNameElement.textContent = usuarioAtual.nome;
+      if (userEmailElement) userEmailElement.textContent = usuarioAtual.email;
+
+      // Atualizar modal de conta
+      if (contaUserName) contaUserName.textContent = usuarioAtual.nome;
+      if (contaUserEmail) contaUserEmail.textContent = usuarioAtual.email;
+      if (contaStatus) {
+        contaStatus.textContent = "Confirmada ✓";
+        contaStatus.style.color = "#10b981";
+      }
+    } else {
+      // Valores padrão
+      if (userNameElement) userNameElement.textContent = "Visitante";
+      if (userEmailElement) userEmailElement.textContent = "Não cadastrado";
+      if (contaUserName) contaUserName.textContent = "Visitante";
+      if (contaUserEmail) contaUserEmail.textContent = "Não cadastrado";
+      if (contaStatus) {
+        contaStatus.textContent = "Não inscrito";
+        contaStatus.style.color = "#ef4444";
+      }
+    }
+  }
+
   // Theme toggle
   const themeToggle = document.getElementById("themeToggle");
   if (themeToggle) {
@@ -12,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Open modal
+  // Abrir modal de cadastro
   const openCadastro = document.getElementById("openCadastro");
   if (openCadastro) {
     openCadastro.addEventListener("click", function () {
@@ -20,25 +57,28 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Close modal when clicking outside
-  window.addEventListener("click", function (event) {
-    const modal = document.getElementById("cadastroModal");
-    if (modal && event.target === modal) {
-      modal.style.display = "none";
-    }
-  });
-
-  // Close modal with ESC key
-  document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape") {
-      const modal = document.getElementById("cadastroModal");
+  // Fechar modais ao clicar no botão de fechar
+  const closeButtons = document.querySelectorAll(".close-modal");
+  closeButtons.forEach((button) => {
+    button.addEventListener("click", function () {
+      const modal = this.closest(".modal");
       if (modal) {
         modal.style.display = "none";
       }
-    }
+    });
   });
 
-  // Form submission
+  // Fechar modais ao clicar fora
+  const modals = document.querySelectorAll(".modal");
+  modals.forEach((modal) => {
+    modal.addEventListener("click", function (e) {
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+  });
+
+  // Formulário de cadastro
   const cadastroForm = document.getElementById("cadastroForm");
   if (cadastroForm) {
     cadastroForm.addEventListener("submit", function (e) {
@@ -51,29 +91,38 @@ document.addEventListener("DOMContentLoaded", function () {
 
       let isValid = true;
 
-      // Reset borders
-      if (nome) nome.style.borderColor = "";
-      if (email) email.style.borderColor = "";
-      if (password) password.style.borderColor = "";
+      // Resetar bordas
+      [nome, email, password].forEach((field) => {
+        if (field) field.style.borderColor = "";
+      });
 
-      // Validate
-      if (nome && !nome.value.trim()) {
+      // Validação
+      if (!nome.value.trim()) {
         nome.style.borderColor = "#ef4444";
         isValid = false;
       }
 
-      if (email && (!email.value.trim() || !email.value.includes("@"))) {
+      if (!email.value.trim() || !email.value.includes("@")) {
         email.style.borderColor = "#ef4444";
         isValid = false;
       }
 
-      if (password && password.value.length < 6) {
+      if (password.value.length < 6) {
         password.style.borderColor = "#ef4444";
         isValid = false;
       }
 
       if (isValid) {
-        // Show toast
+        // Salvar dados do usuário
+        usuarioAtual = {
+          nome: nome.value.trim(),
+          email: email.value.trim(),
+        };
+
+        // Atualizar toda a interface
+        atualizarInterfaceUsuario();
+
+        // Mostrar toast
         if (toast) {
           toast.classList.add("show");
           setTimeout(() => {
@@ -81,17 +130,24 @@ document.addEventListener("DOMContentLoaded", function () {
           }, 3000);
         }
 
-        // Close modal and reset form
-        const modal = document.getElementById("cadastroModal");
-        if (modal) {
-          modal.style.display = "none";
-        }
+        // Fechar modal e resetar formulário
+        document.getElementById("cadastroModal").style.display = "none";
         this.reset();
       }
     });
   }
 
-  // Smooth scrolling for anchor links
+  // Abrir modal de conta
+  const accountButtons = document.querySelectorAll(".account-icon-btn");
+  accountButtons.forEach((button) => {
+    button.addEventListener("click", function (e) {
+      e.preventDefault();
+      atualizarInterfaceUsuario(); // Atualizar antes de mostrar
+      document.getElementById("contaModal").style.display = "flex";
+    });
+  });
+
+  // Navegação suave
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
       e.preventDefault();
@@ -110,4 +166,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
+
+  // Inicializar interface
+  atualizarInterfaceUsuario();
 });
