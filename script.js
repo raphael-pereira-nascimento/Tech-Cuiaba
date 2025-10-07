@@ -5,6 +5,197 @@ document.addEventListener("DOMContentLoaded", function () {
     email: "Não cadastrado",
     inscrito: false,
   };
+  // Funções para abrir modais de login e recuperação
+  const openLoginBtn = document.getElementById("openLoginBtn");
+  if (openLoginBtn) {
+    openLoginBtn.addEventListener("click", function () {
+      document.getElementById("loginModal").style.display = "flex";
+    });
+  }
+
+  // Links dentro do modal de login
+  const linkEsqueciSenha = document.getElementById("linkEsqueciSenha");
+  const linkEsqueciConta = document.getElementById("linkEsqueciConta");
+  const linkCadastroDoLogin = document.getElementById("linkCadastroDoLogin");
+
+  if (linkEsqueciSenha) {
+    linkEsqueciSenha.addEventListener("click", function (e) {
+      e.preventDefault();
+      document.getElementById("loginModal").style.display = "none";
+      document.getElementById("esqueciSenhaModal").style.display = "flex";
+    });
+  }
+
+  if (linkEsqueciConta) {
+    linkEsqueciConta.addEventListener("click", function (e) {
+      e.preventDefault();
+      document.getElementById("loginModal").style.display = "none";
+      document.getElementById("esqueciContaModal").style.display = "flex";
+    });
+  }
+
+  if (linkCadastroDoLogin) {
+    linkCadastroDoLogin.addEventListener("click", function (e) {
+      e.preventDefault();
+      document.getElementById("loginModal").style.display = "none";
+      document.getElementById("cadastroModal").style.display = "flex";
+    });
+  }
+
+  // Botões de voltar
+  const voltarLoginSenha = document.getElementById("voltarLoginSenha");
+  const voltarLoginConta = document.getElementById("voltarLoginConta");
+
+  if (voltarLoginSenha) {
+    voltarLoginSenha.addEventListener("click", function (e) {
+      e.preventDefault();
+      document.getElementById("esqueciSenhaModal").style.display = "none";
+      document.getElementById("loginModal").style.display = "flex";
+    });
+  }
+
+  if (voltarLoginConta) {
+    voltarLoginConta.addEventListener("click", function (e) {
+      e.preventDefault();
+      document.getElementById("esqueciContaModal").style.display = "none";
+      document.getElementById("loginModal").style.display = "flex";
+    });
+  }
+
+  // Fechar modais de recuperação
+  const closeEsqueciSenhaModal = document.getElementById(
+    "closeEsqueciSenhaModal"
+  );
+  const closeEsqueciContaModal = document.getElementById(
+    "closeEsqueciContaModal"
+  );
+  const closeLoginModal = document.getElementById("closeLoginModal");
+
+  if (closeEsqueciSenhaModal) {
+    closeEsqueciSenhaModal.addEventListener("click", function () {
+      document.getElementById("esqueciSenhaModal").style.display = "none";
+    });
+  }
+
+  if (closeEsqueciContaModal) {
+    closeEsqueciContaModal.addEventListener("click", function () {
+      document.getElementById("esqueciContaModal").style.display = "none";
+    });
+  }
+
+  if (closeLoginModal) {
+    closeLoginModal.addEventListener("click", function () {
+      document.getElementById("loginModal").style.display = "none";
+    });
+  }
+
+  // Formulário de recuperação de senha
+  const esqueciSenhaForm = document.getElementById("esqueciSenhaForm");
+  if (esqueciSenhaForm) {
+    esqueciSenhaForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const emailRecuperacao = document.getElementById("emailRecuperacao");
+      const toast = document.getElementById("toast");
+
+      if (
+        emailRecuperacao &&
+        emailRecuperacao.value.trim() &&
+        emailRecuperacao.value.includes("@")
+      ) {
+        // Simular envio de e-mail
+        if (toast) {
+          toast.innerHTML =
+            '<span class="material-symbols-outlined">check_circle</span><span>Link de recuperação enviado para seu e-mail!</span>';
+          toast.classList.add("show");
+          setTimeout(() => {
+            toast.classList.remove("show");
+          }, 4000);
+        }
+
+        // Fechar modal
+        document.getElementById("esqueciSenhaModal").style.display = "none";
+        this.reset();
+      } else {
+        if (emailRecuperacao) {
+          emailRecuperacao.style.borderColor = "#ef4444";
+        }
+      }
+    });
+  }
+
+  // Formulário de login (básico)
+  const loginForm = document.getElementById("loginForm");
+  if (loginForm) {
+    loginForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const loginEmail = document.getElementById("loginEmail");
+      const loginPassword = document.getElementById("loginPassword");
+      const toast = document.getElementById("toast");
+
+      let isValid = true;
+
+      if (
+        loginEmail &&
+        (!loginEmail.value.trim() || !loginEmail.value.includes("@"))
+      ) {
+        loginEmail.style.borderColor = "#ef4444";
+        isValid = false;
+      } else if (loginEmail) {
+        loginEmail.style.borderColor = "";
+      }
+
+      if (loginPassword && loginPassword.value.length < 6) {
+        loginPassword.style.borderColor = "#ef4444";
+        isValid = false;
+      } else if (loginPassword) {
+        loginPassword.style.borderColor = "";
+      }
+
+      if (isValid) {
+        // Simular login bem-sucedido
+        if (toast) {
+          toast.innerHTML =
+            '<span class="material-symbols-outlined">check_circle</span><span>Login realizado com sucesso!</span>';
+          toast.classList.add("show");
+          setTimeout(() => {
+            toast.classList.remove("show");
+          }, 3000);
+        }
+
+        // Atualizar usuário (simulado)
+        usuarioAtual = {
+          nome: "Usuário",
+          email: loginEmail.value.trim(),
+          inscrito: true,
+        };
+
+        atualizarInterface();
+
+        // Fechar modal
+        document.getElementById("loginModal").style.display = "none";
+        this.reset();
+      }
+    });
+  }
+
+  // Fechar todos os modais de recuperação ao clicar fora
+  const recoveryModals = [
+    "esqueciSenhaModal",
+    "esqueciContaModal",
+    "loginModal",
+  ];
+  recoveryModals.forEach((modalId) => {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      modal.addEventListener("click", function (e) {
+        if (e.target === modal) {
+          modal.style.display = "none";
+        }
+      });
+    }
+  });
 
   // Elementos DOM
   const userNameDisplay = document.getElementById("userNameDisplay");

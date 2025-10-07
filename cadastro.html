@@ -301,5 +301,76 @@
       }
     });
   </script>
+  <!-- Modal Esqueci Minha Senha -->
+<div id="esqueciSenhaModal" class="modal">
+  <div class="modal-content">
+    <button class="close-modal" id="closeEsqueciSenhaModal">&times;</button>
+    <div class="modal-header">
+      <h2>Esqueci minha senha</h2>
+    </div>
+    <form id="esqueciSenhaForm">
+      <div class="form-group">
+        <label for="emailRecuperacao">E-mail de recuperação</label>
+        <input type="email" id="emailRecuperacao" class="form-control" required placeholder="seu@email.com">
+      </div>
+      <button type="submit" class="btn-submit">Enviar link de recuperação</button>
+    </form>
+    <div class="modal-footer">
+      <p><a href="#" id="voltarLoginSenha">Voltar para login</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Esqueci Minha Conta -->
+<div id="esqueciContaModal" class="modal">
+  <div class="modal-content">
+    <button class="close-modal" id="closeEsqueciContaModal">&times;</button>
+    <div class="modal-header">
+      <h2>Esqueci minha conta</h2>
+    </div>
+    <div class="help-content">
+      <p>Não se preocupe! Siga estas etapas para recuperar sua conta:</p>
+      <ol>
+        <li>Verifique seu e-mail para mensagens do TechCuiabá</li>
+        <li>Procure por e-mails com assunto "Bem-vindo ao TechCuiabá"</li>
+        <li>Seu e-mail de cadastro está nesses e-mails</li>
+        <li>Use esse e-mail para fazer login ou recuperar senha</li>
+      </ol>
+      <p>Se ainda não encontrar, entre em contato com nosso suporte:</p>
+      <p><strong>contato@techcuiaba.com.br</strong></p>
+    </div>
+    <div class="modal-footer">
+      <p><a href="#" id="voltarLoginConta">Voltar para login</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Login (adicione se não existir) -->
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <button class="close-modal" id="closeLoginModal">&times;</button>
+    <div class="modal-header">
+      <h2>Login - TechCuiabá</h2>
+    </div>
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="loginEmail">E-mail</label>
+        <input type="email" id="loginEmail" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="loginPassword">Senha</label>
+        <input type="password" id="loginPassword" class="form-control" required>
+      </div>
+      <button type="submit" class="btn-submit">Entrar</button>
+    </form>
+    <div class="modal-footer">
+      <p>
+        <a href="#" id="linkEsqueciSenha">Esqueci minha senha</a> | 
+        <a href="#" id="linkEsqueciConta">Esqueci minha conta</a>
+      </p>
+      <p>Não tem conta? <a href="#" id="linkCadastroDoLogin">Cadastre-se</a></p>
+    </div>
+  </div>
+</div>
 </body>
 </html>
