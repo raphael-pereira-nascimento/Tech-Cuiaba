@@ -24,11 +24,11 @@
         <div class="user-info-display">
           <span class="user-name" id="userNameDisplay">Visitante</span>
           <span class="user-email" id="userEmailDisplay">Não cadastrado</span>
-        </div>
+      </div>
         <button class="account-icon-btn" id="openAccountBtn" title="Minha Conta">
           <span class="material-symbols-outlined">account_circle</span>
         </button>
-        <button class="login-btn" id="openLoginBtn">Login</button>
+        <button class="login-btn" onclick="document.getElementById('loginModal').style.display='flex'">Login</button>
         <button class="theme-toggle" id="themeToggle">
           <span class="material-symbols-outlined">light_mode</span>
         </button>
@@ -43,7 +43,7 @@
         <div class="hero-text">
           <h1>TechCuiabá 2025</h1>
           <p>O maior evento de tecnologia e inovação do Centro-Oeste chega a Cuiabá!</p>
-          <button class="btn-register" id="openCadastroBtn">Inscreva-se Agora</button>
+          <button class="btn-register" onclick="document.getElementById('cadastroModal').style.display='flex'">Inscreva-se Agora</button>
         </div>
         <div>
           <img src="img/por-do-sol-drone-de-cuiaba.png">
@@ -89,7 +89,7 @@
           <div class="event-info">
             <h3>TechCuiabá Summit 2025</h3>
             <p>Evento principal com palestras internacionais no coração de Cuiabá.</p>
-            <button class="btn-event" id="openCadastroBtn2">Inscreva-se</button>
+            <button class="btn-event" onclick="document.getElementById('cadastroModal').style.display='flex'">Inscreva-se</button>
           </div>
         </div>
         <div class="event-card">
@@ -104,38 +104,26 @@
     </div>
   </section>
 
-<!-- Modal de Cadastro (atualizado) -->
-<div id="cadastroModal" class="modal">
-  <div class="modal-content">
-    <button class="close-modal" id="closeCadastroModal">&times;</button>
-    <div class="modal-header">
-      <h2>Cadastro - TechCuiabá</h2>
-    </div>
-    <form id="cadastroForm">
-      <div class="form-group">
-        <label for="cadastroNome">Nome Completo</label>
-        <input type="text" id="cadastroNome" class="form-control" required>
-      </div>
-      <div class="form-group">
-        <label for="cadastroEmail">E-mail</label>
-        <input type="email" id="cadastroEmail" class="form-control" required>
-      </div>
-      <div class="form-group">
-        <label for="cadastroPassword">Senha</label>
-        <input type="password" id="cadastroPassword" class="form-control" required minlength="6">
-      </div>
-      <button type="submit" class="btn-submit">Cadastrar</button>
-    </form>
-    <!-- Adicionado aqui: link para esqueci minha senha -->
-    <div class="modal-footer">
-      <p><a href="#" id="linkEsqueciSenhaCadastro">Esqueci minha senha</a></p>
-    </div>
-    <div style="text-align: center; margin-top: 15px;">
-    <a href="#" onclick="alert('Funcionalidade de recuperação de senha ativada! Em um sistema real, você receberia um e-mail com instruções.'); return false;" style="color: #2563eb; text-decoration: none; font-size: 0.875rem;">
-      Esqueci minha senha
-    </a>
+<!-- Modal de Cadastro (trecho atualizado) -->
+<form id="cadastroForm">
+  <div class="form-group">
+    <label for="cadastroNome">Nome Completo</label>
+    <input type="text" id="cadastroNome" class="form-control" required>
   </div>
+  <div class="form-group">
+    <label for="cadastroEmail">E-mail</label>
+    <input type="email" id="cadastroEmail" class="form-control" required>
   </div>
+  <div class="form-group">
+    <label for="cadastroPassword">Senha</label>
+    <input type="password" id="cadastroPassword" class="form-control" required minlength="6">
+  </div>
+  <button type="submit" class="btn-submit">Cadastrar</button>
+</form>
+<div class="forgot-password">
+  <a href="#" onclick="alert('Instruções de recuperação enviadas para seu e-mail!'); return false;">
+    Esqueci minha senha
+  </a>
 </div>
 
 
