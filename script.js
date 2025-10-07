@@ -363,4 +363,81 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Inicializar interface
   atualizarInterface();
+  // Link "Esqueci minha senha" no modal de cadastro
+  const linkEsqueciSenhaCadastro = document.getElementById(
+    "linkEsqueciSenhaCadastro"
+  );
+  if (linkEsqueciSenhaCadastro) {
+    linkEsqueciSenhaCadastro.addEventListener("click", function (e) {
+      e.preventDefault();
+      document.getElementById("cadastroModal").style.display = "none";
+      document.getElementById("esqueciSenhaModal").style.display = "flex";
+    });
+  }
+
+  // Botão "Voltar para cadastro"
+  const voltarCadastro = document.getElementById("voltarCadastro");
+  if (voltarCadastro) {
+    voltarCadastro.addEventListener("click", function (e) {
+      e.preventDefault();
+      document.getElementById("esqueciSenhaModal").style.display = "none";
+      document.getElementById("cadastroModal").style.display = "flex";
+    });
+  }
+
+  // Fechar modal de esqueci senha
+  const closeEsqueciSenhaModal = document.getElementById(
+    "closeEsqueciSenhaModal"
+  );
+  if (closeEsqueciSenhaModal) {
+    closeEsqueciSenhaModal.addEventListener("click", function () {
+      document.getElementById("esqueciSenhaModal").style.display = "none";
+    });
+  }
+
+  // Formulário de recuperação de senha
+  const esqueciSenhaForm = document.getElementById("esqueciSenhaForm");
+  if (esqueciSenhaForm) {
+    esqueciSenhaForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const emailRecuperacao = document.getElementById("emailRecuperacao");
+      const toast = document.getElementById("toast");
+
+      if (
+        emailRecuperacao &&
+        emailRecuperacao.value.trim() &&
+        emailRecuperacao.value.includes("@")
+      ) {
+        // Mostrar toast de sucesso
+        if (toast) {
+          toast.innerHTML =
+            '<span class="material-symbols-outlined">check_circle</span><span>Link de recuperação enviado para seu e-mail!</span>';
+          toast.classList.add("show");
+          setTimeout(() => {
+            toast.classList.remove("show");
+          }, 4000);
+        }
+
+        // Fechar modal e voltar para cadastro
+        document.getElementById("esqueciSenhaModal").style.display = "none";
+        document.getElementById("cadastroModal").style.display = "flex";
+        this.reset();
+      } else {
+        if (emailRecuperacao) {
+          emailRecuperacao.style.borderColor = "#ef4444";
+        }
+      }
+    });
+  }
+
+  // Fechar modal de esqueci senha ao clicar fora
+  const esqueciSenhaModal = document.getElementById("esqueciSenhaModal");
+  if (esqueciSenhaModal) {
+    esqueciSenhaModal.addEventListener("click", function (e) {
+      if (e.target === esqueciSenhaModal) {
+        esqueciSenhaModal.style.display = "none";
+      }
+    });
+  }
 });

@@ -883,3 +883,19 @@ img {
     font-size: 0.8125rem;
   }
 }
+
+/* Modal footer */
+.modal-footer {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.modal-footer a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-size: 0.875rem;
+}
+
+.modal-footer a:hover {
+  text-decoration: underline;
+}
