@@ -3,242 +3,19 @@ document.addEventListener("DOMContentLoaded", function () {
   let usuarioAtual = {
     nome: "Visitante",
     email: "Não cadastrado",
-    inscrito: false,
   };
-  // Funções para abrir modais de login e recuperação
-  const openLoginBtn = document.getElementById("openLoginBtn");
-  if (openLoginBtn) {
-    openLoginBtn.addEventListener("click", function () {
-      document.getElementById("loginModal").style.display = "flex";
-    });
-  }
-
-  // Links dentro do modal de login
-  const linkEsqueciSenha = document.getElementById("linkEsqueciSenha");
-  const linkEsqueciConta = document.getElementById("linkEsqueciConta");
-  const linkCadastroDoLogin = document.getElementById("linkCadastroDoLogin");
-
-  if (linkEsqueciSenha) {
-    linkEsqueciSenha.addEventListener("click", function (e) {
-      e.preventDefault();
-      document.getElementById("loginModal").style.display = "none";
-      document.getElementById("esqueciSenhaModal").style.display = "flex";
-    });
-  }
-
-  if (linkEsqueciConta) {
-    linkEsqueciConta.addEventListener("click", function (e) {
-      e.preventDefault();
-      document.getElementById("loginModal").style.display = "none";
-      document.getElementById("esqueciContaModal").style.display = "flex";
-    });
-  }
-
-  if (linkCadastroDoLogin) {
-    linkCadastroDoLogin.addEventListener("click", function (e) {
-      e.preventDefault();
-      document.getElementById("loginModal").style.display = "none";
-      document.getElementById("cadastroModal").style.display = "flex";
-    });
-  }
-
-  // Botões de voltar
-  const voltarLoginSenha = document.getElementById("voltarLoginSenha");
-  const voltarLoginConta = document.getElementById("voltarLoginConta");
-
-  if (voltarLoginSenha) {
-    voltarLoginSenha.addEventListener("click", function (e) {
-      e.preventDefault();
-      document.getElementById("esqueciSenhaModal").style.display = "none";
-      document.getElementById("loginModal").style.display = "flex";
-    });
-  }
-
-  if (voltarLoginConta) {
-    voltarLoginConta.addEventListener("click", function (e) {
-      e.preventDefault();
-      document.getElementById("esqueciContaModal").style.display = "none";
-      document.getElementById("loginModal").style.display = "flex";
-    });
-  }
-
-  // Fechar modais de recuperação
-  const closeEsqueciSenhaModal = document.getElementById(
-    "closeEsqueciSenhaModal"
-  );
-  const closeEsqueciContaModal = document.getElementById(
-    "closeEsqueciContaModal"
-  );
-  const closeLoginModal = document.getElementById("closeLoginModal");
-
-  if (closeEsqueciSenhaModal) {
-    closeEsqueciSenhaModal.addEventListener("click", function () {
-      document.getElementById("esqueciSenhaModal").style.display = "none";
-    });
-  }
-
-  if (closeEsqueciContaModal) {
-    closeEsqueciContaModal.addEventListener("click", function () {
-      document.getElementById("esqueciContaModal").style.display = "none";
-    });
-  }
-
-  if (closeLoginModal) {
-    closeLoginModal.addEventListener("click", function () {
-      document.getElementById("loginModal").style.display = "none";
-    });
-  }
-
-  // Formulário de recuperação de senha
-  const esqueciSenhaForm = document.getElementById("esqueciSenhaForm");
-  if (esqueciSenhaForm) {
-    esqueciSenhaForm.addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      const emailRecuperacao = document.getElementById("emailRecuperacao");
-      const toast = document.getElementById("toast");
-
-      if (
-        emailRecuperacao &&
-        emailRecuperacao.value.trim() &&
-        emailRecuperacao.value.includes("@")
-      ) {
-        // Simular envio de e-mail
-        if (toast) {
-          toast.innerHTML =
-            '<span class="material-symbols-outlined">check_circle</span><span>Link de recuperação enviado para seu e-mail!</span>';
-          toast.classList.add("show");
-          setTimeout(() => {
-            toast.classList.remove("show");
-          }, 4000);
-        }
-
-        // Fechar modal
-        document.getElementById("esqueciSenhaModal").style.display = "none";
-        this.reset();
-      } else {
-        if (emailRecuperacao) {
-          emailRecuperacao.style.borderColor = "#ef4444";
-        }
-      }
-    });
-  }
-
-  // Formulário de login (básico)
-  const loginForm = document.getElementById("loginForm");
-  if (loginForm) {
-    loginForm.addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      const loginEmail = document.getElementById("loginEmail");
-      const loginPassword = document.getElementById("loginPassword");
-      const toast = document.getElementById("toast");
-
-      let isValid = true;
-
-      if (
-        loginEmail &&
-        (!loginEmail.value.trim() || !loginEmail.value.includes("@"))
-      ) {
-        loginEmail.style.borderColor = "#ef4444";
-        isValid = false;
-      } else if (loginEmail) {
-        loginEmail.style.borderColor = "";
-      }
-
-      if (loginPassword && loginPassword.value.length < 6) {
-        loginPassword.style.borderColor = "#ef4444";
-        isValid = false;
-      } else if (loginPassword) {
-        loginPassword.style.borderColor = "";
-      }
-
-      if (isValid) {
-        // Simular login bem-sucedido
-        if (toast) {
-          toast.innerHTML =
-            '<span class="material-symbols-outlined">check_circle</span><span>Login realizado com sucesso!</span>';
-          toast.classList.add("show");
-          setTimeout(() => {
-            toast.classList.remove("show");
-          }, 3000);
-        }
-
-        // Atualizar usuário (simulado)
-        usuarioAtual = {
-          nome: "Usuário",
-          email: loginEmail.value.trim(),
-          inscrito: true,
-        };
-
-        atualizarInterface();
-
-        // Fechar modal
-        document.getElementById("loginModal").style.display = "none";
-        this.reset();
-      }
-    });
-  }
-
-  // Fechar todos os modais de recuperação ao clicar fora
-  const recoveryModals = [
-    "esqueciSenhaModal",
-    "esqueciContaModal",
-    "loginModal",
-  ];
-  recoveryModals.forEach((modalId) => {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-      modal.addEventListener("click", function (e) {
-        if (e.target === modal) {
-          modal.style.display = "none";
-        }
-      });
-    }
-  });
 
   // Elementos DOM
   const userNameDisplay = document.getElementById("userNameDisplay");
   const userEmailDisplay = document.getElementById("userEmailDisplay");
-  const contaUserName = document.getElementById("contaUserName");
-  const contaUserEmail = document.getElementById("contaUserEmail");
-  const contaStatus = document.getElementById("contaStatus");
 
-  // Função para atualizar todos os elementos da interface
+  // Função para atualizar interface
   function atualizarInterface() {
-    // Atualizar header
     if (userNameDisplay) userNameDisplay.textContent = usuarioAtual.nome;
     if (userEmailDisplay) userEmailDisplay.textContent = usuarioAtual.email;
-
-    // Atualizar modal de conta
-    if (contaUserName) contaUserName.textContent = usuarioAtual.nome;
-    if (contaUserEmail) contaUserEmail.textContent = usuarioAtual.email;
-
-    if (contaStatus) {
-      if (usuarioAtual.inscrito) {
-        contaStatus.textContent = "Confirmada ✓";
-        contaStatus.style.color = "#10b981";
-      } else {
-        contaStatus.textContent = "Não inscrito";
-        contaStatus.style.color = "#ef4444";
-      }
-    }
   }
 
-  // Theme toggle
-  const themeToggle = document.getElementById("themeToggle");
-  if (themeToggle) {
-    themeToggle.addEventListener("click", function () {
-      const current = document.body.getAttribute("data-theme") || "light";
-      const newTheme = current === "light" ? "dark" : "light";
-      document.body.setAttribute("data-theme", newTheme);
-
-      const icon = newTheme === "dark" ? "dark_mode" : "light_mode";
-      this.innerHTML = `<span class="material-symbols-outlined">${icon}</span>`;
-    });
-  }
-
-  // Modal de cadastro - abrir
+  // Abrir modal de cadastro
   const openCadastroBtns = document.querySelectorAll('[id^="openCadastroBtn"]');
   openCadastroBtns.forEach((btn) => {
     btn.addEventListener("click", function () {
@@ -246,18 +23,17 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Modal de conta - abrir
-  const openAccountBtn = document.getElementById("openAccountBtn");
-  if (openAccountBtn) {
-    openAccountBtn.addEventListener("click", function () {
-      atualizarInterface();
-      document.getElementById("contaModal").style.display = "flex";
+  // Abrir modal de login
+  const openLoginBtn = document.getElementById("openLoginBtn");
+  if (openLoginBtn) {
+    openLoginBtn.addEventListener("click", function () {
+      document.getElementById("loginModal").style.display = "flex";
     });
   }
 
   // Fechar modais
   const closeCadastroModal = document.getElementById("closeCadastroModal");
-  const closeContaModal = document.getElementById("closeContaModal");
+  const closeLoginModal = document.getElementById("closeLoginModal");
 
   if (closeCadastroModal) {
     closeCadastroModal.addEventListener("click", function () {
@@ -265,9 +41,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  if (closeContaModal) {
-    closeContaModal.addEventListener("click", function () {
-      document.getElementById("contaModal").style.display = "none";
+  if (closeLoginModal) {
+    closeLoginModal.addEventListener("click", function () {
+      document.getElementById("loginModal").style.display = "none";
     });
   }
 
@@ -294,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       let isValid = true;
 
-      // Resetar estilos de erro
+      // Resetar bordas
       [nome, email, password].forEach((field) => {
         if (field) field.style.borderColor = "";
       });
@@ -316,14 +92,13 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       if (isValid) {
-        // Salvar dados do usuário
+        // Salvar dados
         usuarioAtual = {
           nome: nome.value.trim(),
           email: email.value.trim(),
-          inscrito: true,
         };
 
-        // Atualizar toda a interface
+        // Atualizar interface
         atualizarInterface();
 
         // Mostrar toast
@@ -334,10 +109,63 @@ document.addEventListener("DOMContentLoaded", function () {
           }, 3000);
         }
 
-        // Fechar modal e resetar formulário
+        // Fechar modal e resetar
         document.getElementById("cadastroModal").style.display = "none";
         this.reset();
       }
+    });
+  }
+
+  // Formulário de login
+  const loginForm = document.getElementById("loginForm");
+  if (loginForm) {
+    loginForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const email = document.getElementById("loginEmail");
+      const password = document.getElementById("loginPassword");
+      const toast = document.getElementById("toast");
+
+      let isValid = true;
+
+      if (!email || !email.value.trim() || !email.value.includes("@")) {
+        if (email) email.style.borderColor = "#ef4444";
+        isValid = false;
+      }
+
+      if (!password || password.value.length < 6) {
+        if (password) password.style.borderColor = "#ef4444";
+        isValid = false;
+      }
+
+      if (isValid) {
+        // Simular login
+        usuarioAtual = {
+          nome: email.value.split("@")[0],
+          email: email.value.trim(),
+        };
+
+        atualizarInterface();
+
+        if (toast) {
+          toast.classList.add("show");
+          setTimeout(() => {
+            toast.classList.remove("show");
+          }, 3000);
+        }
+
+        document.getElementById("loginModal").style.display = "none";
+        this.reset();
+      }
+    });
+  }
+
+  // Esqueci minha senha
+  const esqueciSenhaLink = document.getElementById("esqueciSenhaLink");
+  if (esqueciSenhaLink) {
+    esqueciSenhaLink.addEventListener("click", function (e) {
+      e.preventDefault();
+      alert("Instruções de recuperação de senha enviadas para seu e-mail!");
     });
   }
 
@@ -361,83 +189,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Inicializar interface
+  // Inicializar
   atualizarInterface();
-  // Link "Esqueci minha senha" no modal de cadastro
-  const linkEsqueciSenhaCadastro = document.getElementById(
-    "linkEsqueciSenhaCadastro"
-  );
-  if (linkEsqueciSenhaCadastro) {
-    linkEsqueciSenhaCadastro.addEventListener("click", function (e) {
-      e.preventDefault();
-      document.getElementById("cadastroModal").style.display = "none";
-      document.getElementById("esqueciSenhaModal").style.display = "flex";
-    });
-  }
-
-  // Botão "Voltar para cadastro"
-  const voltarCadastro = document.getElementById("voltarCadastro");
-  if (voltarCadastro) {
-    voltarCadastro.addEventListener("click", function (e) {
-      e.preventDefault();
-      document.getElementById("esqueciSenhaModal").style.display = "none";
-      document.getElementById("cadastroModal").style.display = "flex";
-    });
-  }
-
-  // Fechar modal de esqueci senha
-  const closeEsqueciSenhaModal = document.getElementById(
-    "closeEsqueciSenhaModal"
-  );
-  if (closeEsqueciSenhaModal) {
-    closeEsqueciSenhaModal.addEventListener("click", function () {
-      document.getElementById("esqueciSenhaModal").style.display = "none";
-    });
-  }
-
-  // Formulário de recuperação de senha
-  const esqueciSenhaForm = document.getElementById("esqueciSenhaForm");
-  if (esqueciSenhaForm) {
-    esqueciSenhaForm.addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      const emailRecuperacao = document.getElementById("emailRecuperacao");
-      const toast = document.getElementById("toast");
-
-      if (
-        emailRecuperacao &&
-        emailRecuperacao.value.trim() &&
-        emailRecuperacao.value.includes("@")
-      ) {
-        // Mostrar toast de sucesso
-        if (toast) {
-          toast.innerHTML =
-            '<span class="material-symbols-outlined">check_circle</span><span>Link de recuperação enviado para seu e-mail!</span>';
-          toast.classList.add("show");
-          setTimeout(() => {
-            toast.classList.remove("show");
-          }, 4000);
-        }
-
-        // Fechar modal e voltar para cadastro
-        document.getElementById("esqueciSenhaModal").style.display = "none";
-        document.getElementById("cadastroModal").style.display = "flex";
-        this.reset();
-      } else {
-        if (emailRecuperacao) {
-          emailRecuperacao.style.borderColor = "#ef4444";
-        }
-      }
-    });
-  }
-
-  // Fechar modal de esqueci senha ao clicar fora
-  const esqueciSenhaModal = document.getElementById("esqueciSenhaModal");
-  if (esqueciSenhaModal) {
-    esqueciSenhaModal.addEventListener("click", function (e) {
-      if (e.target === esqueciSenhaModal) {
-        esqueciSenhaModal.style.display = "none";
-      }
-    });
-  }
 });
