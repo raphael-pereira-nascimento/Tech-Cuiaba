@@ -29,6 +29,9 @@
           <span class="material-symbols-outlined">account_circle</span>
         </button>
         <button class="login-btn" id="openLoginBtn">Login</button>
+        <button class="theme-toggle" id="themeToggle">
+          <span class="material-symbols-outlined">light_mode</span>
+        </button>
       </div>
     </div>
   </header>
@@ -74,6 +77,82 @@
     </div>
   </section>
 
+  <!-- Modal de Conta -->
+  <div id="contaModal" class="modal">
+    <div class="modal-content">
+      <button class="close-modal" id="closeContaModal">&times;</button>
+      <div class="modal-header">
+        <h2>Minha Conta</h2>
+      </div>
+      <div class="account-content">
+        <div class="user-info">
+          <h3>Dados do Participante</h3>
+          <div class="detail-item">
+            <strong>Nome:</strong> <span id="contaUserName">Visitante</span>
+          </div>
+          <div class="detail-item">
+            <strong>E-mail:</strong> <span id="contaUserEmail">Não cadastrado</span>
+          </div>
+          <div class="detail-item">
+            <strong>Status:</strong> <span id="contaStatus" class="account-status">Não inscrito</span>
+          </div>
+        </div>
+        
+        <div class="event-info">
+          <h3>TechCuiabá Summit 2024</h3>
+          <div class="detail-item">
+            <span class="material-symbols-outlined">calendar_month</span>
+            <div>
+              <strong>Data:</strong><br>
+              15 de Novembro de 2024
+            </div>
+          </div>
+          <div class="detail-item">
+            <span class="material-symbols-outlined">schedule</span>
+            <div>
+              <strong>Horário:</strong><br>
+              08:00 - 18:00
+            </div>
+          </div>
+          <div class="detail-item">
+            <span class="material-symbols-outlined">location_on</span>
+            <div>
+              <strong>Local:</strong><br>
+              Centro de Convenções de Cuiabá
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="contaToLoginBtn">Fazer Login</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Login -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <button class="close-modal" id="closeLoginModal">&times;</button>
+      <div class="modal-header">
+        <h2>Login - TechCuiabá</h2>
+      </div>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="loginEmail">E-mail</label>
+          <input type="email" id="loginEmail" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Senha</label>
+          <input type="password" id="loginPassword" class="form-control" required>
+        </div>
+        <button type="submit" class="btn-submit">Entrar</button>
+      </form>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="loginToCadastroBtn">Cadastre-se</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Modal de Cadastro -->
   <div id="cadastroModal" class="modal">
     <div class="modal-content">
@@ -102,30 +181,12 @@
         </div>
         <button type="submit" class="btn-submit">Cadastrar</button>
       </form>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="cadastroToLoginBtn">Já tem conta? Faça login</button>
+      </div>
       <div class="forgot-password-section">
         <a href="#" id="esqueciSenhaLink">Esqueci minha senha</a>
       </div>
-    </div>
-  </div>
-
-  <!-- Modal de Login -->
-  <div id="loginModal" class="modal">
-    <div class="modal-content">
-      <button class="close-modal" id="closeLoginModal">&times;</button>
-      <div class="modal-header">
-        <h2>Login - TechCuiabá</h2>
-      </div>
-      <form id="loginForm">
-        <div class="form-group">
-          <label for="loginEmail">E-mail</label>
-          <input type="email" id="loginEmail" class="form-control" required>
-        </div>
-        <div class="form-group">
-          <label for="loginPassword">Senha</label>
-          <input type="password" id="loginPassword" class="form-control" required>
-        </div>
-        <button type="submit" class="btn-submit">Entrar</button>
-      </form>
     </div>
   </div>
 
@@ -135,6 +196,155 @@
     <span>Operação realizada com sucesso!</span>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    // Estado do usuário
+    let usuarioAtual = {
+      nome: 'Visitante',
+      email: 'Não cadastrado'
+    };
+    
+    // Atualizar interface
+    function atualizarInterface() {
+      document.getElementById('userNameDisplay').textContent = usuarioAtual.nome;
+      document.getElementById('userEmailDisplay').textContent = usuarioAtual.email;
+    }
+    
+    // Abrir modais
+    document.getElementById('openCadastroBtn').onclick = function() {
+      document.getElementById('cadastroModal').style.display = 'flex';
+    };
+    
+    document.getElementById('openCadastroBtn2').onclick = function() {
+      document.getElementById('cadastroModal').style.display = 'flex';
+    };
+    
+    document.getElementById('openCadastroBtn3').onclick = function() {
+      document.getElementById('cadastroModal').style.display = 'flex';
+    };
+    
+    document.getElementById('openLoginBtn').onclick = function() {
+      document.getElementById('loginModal').style.display = 'flex';
+    };
+    
+    document.getElementById('openAccountBtn').onclick = function() {
+      // Atualizar dados do modal de conta
+      document.getElementById('contaUserName').textContent = usuarioAtual.nome;
+      document.getElementById('contaUserEmail').textContent = usuarioAtual.email;
+      
+      const contaStatus = document.getElementById('contaStatus');
+      if (usuarioAtual.email !== 'Não cadastrado') {
+        contaStatus.textContent = 'Inscrito ✓';
+        contaStatus.style.color = '#10b981';
+      } else {
+        contaStatus.textContent = 'Não inscrito';
+        contaStatus.style.color = '#ef4444';
+      }
+      
+      document.getElementById('contaModal').style.display = 'flex';
+    };
+    
+    // Fechar modais
+    document.getElementById('closeContaModal').onclick = function() {
+      document.getElementById('contaModal').style.display = 'none';
+    };
+    
+    document.getElementById('closeLoginModal').onclick = function() {
+      document.getElementById('loginModal').style.display = 'none';
+    };
+    
+    document.getElementById('closeCadastroModal').onclick = function() {
+      document.getElementById('cadastroModal').style.display = 'none';
+    };
+    
+    // Navegação entre modais
+    document.getElementById('contaToLoginBtn').onclick = function() {
+      document.getElementById('contaModal').style.display = 'none';
+      document.getElementById('loginModal').style.display = 'flex';
+    };
+    
+    document.getElementById('loginToCadastroBtn').onclick = function() {
+      document.getElementById('loginModal').style.display = 'none';
+      document.getElementById('cadastroModal').style.display = 'flex';
+    };
+    
+    document.getElementById('cadastroToLoginBtn').onclick = function() {
+      document.getElementById('cadastroModal').style.display = 'none';
+      document.getElementById('loginModal').style.display = 'flex';
+    };
+    
+    // Formulário de cadastro
+    document.getElementById('cadastroForm').onsubmit = function(e) {
+      e.preventDefault();
+      
+      const nome = document.getElementById('cadastroNome');
+      const email = document.getElementById('cadastroEmail');
+      const password = document.getElementById('cadastroPassword');
+      
+      if (email.value.includes('@') && password.value.length >= 6) {
+        usuarioAtual = {
+          nome: nome.value,
+          email: email.value
+        };
+        atualizarInterface();
+        
+        document.getElementById('toast').classList.add('show');
+        setTimeout(() => {
+          document.getElementById('toast').classList.remove('show');
+        }, 3000);
+        
+        document.getElementById('cadastroModal').style.display = 'none';
+        this.reset();
+      }
+    };
+    
+    // Formulário de login
+    document.getElementById('loginForm').onsubmit = function(e) {
+      e.preventDefault();
+      
+      const email = document.getElementById('loginEmail');
+      
+      if (email.value.includes('@')) {
+        usuarioAtual = {
+          nome: email.value.split('@')[0],
+          email: email.value
+        };
+        atualizarInterface();
+        
+        document.getElementById('toast').classList.add('show');
+        setTimeout(() => {
+          document.getElementById('toast').classList.remove('show');
+        }, 3000);
+        
+        document.getElementById('loginModal').style.display = 'none';
+        this.reset();
+      }
+    };
+    
+    // Esqueci minha senha
+    document.getElementById('esqueciSenhaLink').onclick = function(e) {
+      e.preventDefault();
+      alert('Instruções de recuperação enviadas para seu e-mail!');
+    };
+    
+    // Fechar modais ao clicar fora
+    window.onclick = function(e) {
+      if (e.target.className === 'modal') {
+        e.target.style.display = 'none';
+      }
+    };
+    
+    // Theme toggle
+    document.getElementById('themeToggle').onclick = function() {
+      const current = document.body.getAttribute('data-theme') || 'light';
+      const newTheme = current === 'light' ? 'dark' : 'light';
+      document.body.setAttribute('data-theme', newTheme);
+      
+      const icon = newTheme === 'dark' ? 'dark_mode' : 'light_mode';
+      this.innerHTML = `<span class="material-symbols-outlined">${icon}</span>`;
+    };
+    
+    // Inicializar
+    atualizarInterface();
+  </script>
 </body>
 </html>

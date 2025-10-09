@@ -4,6 +4,118 @@ document.addEventListener("DOMContentLoaded", function () {
     nome: "Visitante",
     email: "Não cadastrado",
   };
+  // Estado do usuário (adicione no início do script)
+  let usuarioAtual = {
+    nome: "Visitante",
+    email: "Não cadastrado",
+  };
+
+  // Função para atualizar interface (adicione no início do script)
+  function atualizarInterface() {
+    const userNameDisplay = document.getElementById("userNameDisplay");
+    const userEmailDisplay = document.getElementById("userEmailDisplay");
+
+    if (userNameDisplay) userNameDisplay.textContent = usuarioAtual.nome;
+    if (userEmailDisplay) userEmailDisplay.textContent = usuarioAtual.email;
+  }
+
+  // Abrir modal de conta
+  const openAccountBtn = document.getElementById("openAccountBtn");
+  if (openAccountBtn) {
+    openAccountBtn.addEventListener("click", function () {
+      // Atualizar dados do modal de conta
+      const contaUserName = document.getElementById("contaUserName");
+      const contaUserEmail = document.getElementById("contaUserEmail");
+      const contaStatus = document.getElementById("contaStatus");
+
+      if (contaUserName) contaUserName.textContent = usuarioAtual.nome;
+      if (contaUserEmail) contaUserEmail.textContent = usuarioAtual.email;
+      if (contaStatus) {
+        if (usuarioAtual.email !== "Não cadastrado") {
+          contaStatus.textContent = "Inscrito ✓";
+          contaStatus.style.color = "#10b981";
+        } else {
+          contaStatus.textContent = "Não inscrito";
+          contaStatus.style.color = "#ef4444";
+        }
+      }
+
+      document.getElementById("contaModal").style.display = "flex";
+    });
+  }
+
+  if (isValid) {
+    // Salvar dados
+    usuarioAtual = {
+      nome: nome.value.trim(),
+      email: email.value.trim(),
+    };
+
+    // Atualizar interface
+    atualizarInterface();
+
+    // Resto do código existente...
+  }
+
+  // Navegação entre modais
+  const contaToLoginBtn = document.getElementById("contaToLoginBtn");
+  const loginToCadastroBtn = document.getElementById("loginToCadastroBtn");
+
+  if (contaToLoginBtn) {
+    contaToLoginBtn.addEventListener("click", function () {
+      document.getElementById("contaModal").style.display = "none";
+      document.getElementById("loginModal").style.display = "flex";
+    });
+  }
+
+  if (loginToCadastroBtn) {
+    loginToCadastroBtn.addEventListener("click", function () {
+      document.getElementById("loginModal").style.display = "none";
+      document.getElementById("cadastroModal").style.display = "flex";
+    });
+  }
+
+  // Fechar modal de conta
+  const closeContaModal = document.getElementById("closeContaModal");
+  if (closeContaModal) {
+    closeContaModal.addEventListener("click", function () {
+      document.getElementById("contaModal").style.display = "none";
+    });
+  }
+
+  // Fechar modal de conta ao clicar fora
+  const contaModal = document.getElementById("contaModal");
+  if (contaModal) {
+    contaModal.addEventListener("click", function (e) {
+      if (e.target === contaModal) {
+        contaModal.style.display = "none";
+      }
+    });
+  }
+
+
+  // Theme toggle functionality
+  const themeToggle = document.getElementById("themeToggle");
+  if (themeToggle) {
+    themeToggle.addEventListener("click", function () {
+      const current = document.body.getAttribute("data-theme") || "light";
+      const newTheme = current === "light" ? "dark" : "light";
+      document.body.setAttribute("data-theme", newTheme);
+
+      const icon = newTheme === "dark" ? "dark_mode" : "light_mode";
+      this.innerHTML = `<span class="material-symbols-outlined">${icon}</span>`;
+    });
+  }
+
+  // Account button functionality (básica)
+  const openAccountBtn = document.getElementById("openAccountBtn");
+  if (openAccountBtn) {
+    openAccountBtn.addEventListener("click", function () {
+      alert(
+        `Conta: ${usuarioAtual.nome}\nE-mail: ${usuarioAtual.email}\n\nEvento: TechCuiabá Summit 2024\nData: 15/11/2024\nLocal: Centro de Convenções de Cuiabá`
+      );
+    });
+  }
 
   // Elementos DOM
   const userNameDisplay = document.getElementById("userNameDisplay");
