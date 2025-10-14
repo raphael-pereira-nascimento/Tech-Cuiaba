@@ -4,88 +4,102 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Minha Conta - TechCuiabá</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7ff;
+      margin: 0;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #2563eb;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    
+    .user-info {
+      background: #f8fafc;
+      padding: 30px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+    }
+    
+    .user-info p {
+      margin: 10px 0;
+      font-size: 18px;
+    }
+    
+    .event-info {
+      background: #f0f9ff;
+      padding: 30px;
+      border-radius: 12px;
+    }
+    
+    .event-info h3 {
+      color: #2563eb;
+      margin-bottom: 20px;
+    }
+    
+    .back-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 24px;
+      background: #2563eb;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <div class="container header-content">
-      <div class="logo">TechCuiabá</div>
-      <nav>
-        <ul>
-          <li><a href="index.html">Início</a></li>
-          <li><a href="index.html#sobre">Sobre</a></li>
-          <li><a href="index.html#eventos">Eventos</a></li>
-          <li><a href="index.html#contato">Contato</a></li>
-        </ul>
-      </nav>
-      <div class="header-right">
-        <a href="login.html" class="btn-primary">Login</a>
-        <button class="theme-toggle" id="themeToggle">
-          <span class="material-symbols-outlined">light_mode</span>
-        </button>
-      </div>
+  <div class="container">
+    <div class="logo">TechCuiabá</div>
+    <h1 style="text-align: center; margin-bottom: 30px;">Minha Conta</h1>
+    
+    <div class="user-info" id="userInfo">
+      <p><strong>Nome:</strong> Visitante</p>
+      <p><strong>E-mail:</strong> Não cadastrado</p>
+      <p><strong>Status:</strong> <span style="color: #ef4444;">Não inscrito</span></p>
     </div>
-  </header>
+    
+    <div class="event-info">
+      <h3>TechCuiabá Summit 2024</h3>
+      <p><strong>Data:</strong> 15 de Novembro de 2024</p>
+      <p><strong>Local:</strong> Centro de Convenções de Cuiabá</p>
+      <p><strong>Horário:</strong> 08:00 - 18:00</p>
+    </div>
+    
+    <a href="index.html" class="back-btn">Voltar para o Início</a>
+  </div>
 
-  <section class="section">
-    <div class="container">
-      <h2 class="section-title">Minha Conta</h2>
-      <p class="section-subtitle">Informações da sua inscrição e detalhes do evento</p>
+  <script>
+    // Carregar dados do usuário
+    document.addEventListener('DOMContentLoaded', function() {
+      const userData = localStorage.getItem('usuario_techcuiaba');
+      const userInfo = document.getElementById('userInfo');
       
-      <div class="about-content">
-        <div class="about-text">
-          <h3>Dados do Participante</h3>
-          <div class="stat-card" style="margin-bottom: 24px;">
-            <p><strong>Nome:</strong> João Silva Oliveira</p>
-            <p><strong>E-mail:</strong> joao.silva@email.com</p>
-            <p><strong>Instituição:</strong> Universidade Federal de Mato Grosso</p>
-            <p><strong>Status:</strong> <span style="color: #10b981;">Inscrito ✓</span></p>
-          </div>
-        </div>
-        <div class="about-image">
-          <img src="https://placehold.co/500x350/2563eb/white?text=TechCuiabá+2024" alt="TechCuiabá 2024">
-        </div>
-      </div>
-
-      <div class="events-grid" style="margin-top: 48px;">
-        <div class="event-card">
-          <div class="event-info">
-            <h3>TechCuiabá Summit 2024</h3>
-            <div class="event-meta">
-              <div class="event-detail">
-                <span class="material-symbols-outlined">calendar_month</span>
-                <span>15 de Novembro de 2024</span>
-              </div>
-              <div class="event-detail">
-                <span class="material-symbols-outlined">schedule</span>
-                <span>08:00 - 18:00</span>
-              </div>
-              <div class="event-detail">
-                <span class="material-symbols-outlined">location_on</span>
-                <span>Centro de Convenções de Cuiabá</span>
-              </div>
-              <div class="event-detail">
-                <span class="material-symbols-outlined">confirmation_number</span>
-                <span>Código: TCB2024-789456</span>
-              </div>
-            </div>
-            <p style="margin-top: 24px; color: #64748b;">Apresente este código no credenciamento do evento.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="container">
-      <div class="copyright">
-        <p>&copy; 2024 TechCuiabá. Todos os direitos reservados.</p>
-      </div>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
+      if (userData) {
+        const user = JSON.parse(userData);
+        userInfo.innerHTML = `
+          <p><strong>Nome:</strong> ${user.nome}</p>
+          <p><strong>E-mail:</strong> ${user.email}</p>
+          <p><strong>Status:</strong> <span style="color: #10b981;">Inscrito ✓</span></p>
+        `;
+      }
+    });
+  </script>
 </body>
 </html>
