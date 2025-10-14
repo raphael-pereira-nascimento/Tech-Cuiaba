@@ -4,101 +4,102 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Minha Conta - TechCuiabá</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f7ff;
-      margin: 0;
-      padding: 20px;
-    }
-    
-    .container {
-      max-width: 800px;
-      margin: 40px auto;
-      background: white;
-      padding: 40px;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    }
-    
-    .logo {
-      font-size: 24px;
-      font-weight: bold;
-      color: #2563eb;
-      margin-bottom: 30px;
-      text-align: center;
-    }
-    
-    .user-info {
-      background: #f8fafc;
-      padding: 30px;
-      border-radius: 12px;
-      margin-bottom: 30px;
-    }
-    
-    .user-info p {
-      margin: 10px 0;
-      font-size: 18px;
-    }
-    
-    .event-info {
-      background: #f0f9ff;
-      padding: 30px;
-      border-radius: 12px;
-    }
-    
-    .event-info h3 {
-      color: #2563eb;
-      margin-bottom: 20px;
-    }
-    
-    .back-btn {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 12px 24px;
-      background: #2563eb;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
 </head>
 <body>
-  <div class="container">
-    <div class="logo">TechCuiabá</div>
-    <h1 style="text-align: center; margin-bottom: 30px;">Minha Conta</h1>
-    
-    <div class="user-info" id="userInfo">
-      <p><strong>Nome:</strong> Visitante</p>
-      <p><strong>E-mail:</strong> Não cadastrado</p>
-      <p><strong>Status:</strong> <span style="color: #ef4444;">Não inscrito</span></p>
+  <header>
+    <div class="container header-content">
+      <div class="logo">TechCuiabá</div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="index.html#sobre">Sobre</a></li>
+          <li><a href="index.html#eventos">Eventos</a></li>
+          <li><a href="index.html#contato">Contato</a></li>
+        </ul>
+      </nav>
+      <div class="header-right">
+        <button class="theme-toggle" id="themeToggle">
+          <span class="material-symbols-outlined">light_mode</span>
+        </button>
+        <a href="index.html" class="btn-primary">Voltar</a>
+      </div>
     </div>
-    
-    <div class="event-info">
-      <h3>TechCuiabá Summit 2024</h3>
-      <p><strong>Data:</strong> 15 de Novembro de 2024</p>
-      <p><strong>Local:</strong> Centro de Convenções de Cuiabá</p>
-      <p><strong>Horário:</strong> 08:00 - 18:00</p>
-    </div>
-    
-    <a href="index.html" class="back-btn">Voltar para o Início</a>
-  </div>
+  </header>
 
-  <script>
-    // Carregar dados do usuário
-    document.addEventListener('DOMContentLoaded', function() {
-      const userData = localStorage.getItem('usuario_techcuiaba');
-      const userInfo = document.getElementById('userInfo');
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Minha Conta</h2>
       
-      if (userData) {
-        const user = JSON.parse(userData);
-        userInfo.innerHTML = `
-          <p><strong>Nome:</strong> ${user.nome}</p>
-          <p><strong>E-mail:</strong> ${user.email}</p>
-          <p><strong>Status:</strong> <span style="color: #10b981;">Inscrito ✓</span></p>
-        `;
-      }
+      <div class="account-content">
+        <div class="user-info">
+          <h3>Dados do Participante</h3>
+          <div class="detail-item">
+            <strong>Nome:</strong> <span id="contaUserName">Visitante</span>
+          </div>
+          <div class="detail-item">
+            <strong>E-mail:</strong> <span id="contaUserEmail">Não cadastrado</span>
+          </div>
+          <div class="detail-item">
+            <strong>Status:</strong> <span id="contaStatus" class="account-status">Não inscrito</span>
+          </div>
+        </div>
+        
+        <div class="event-info">
+          <h3>TechCuiabá Summit 2024</h3>
+          <div class="detail-item">
+            <span class="material-symbols-outlined">calendar_month</span>
+            <div>
+              <strong>Data:</strong><br>
+              15 de Novembro de 2024
+            </div>
+          </div>
+          <div class="detail-item">
+            <span class="material-symbols-outlined">schedule</span>
+            <div>
+              <strong>Horário:</strong><br>
+              08:00 - 18:00
+            </div>
+          </div>
+          <div class="detail-item">
+            <span class="material-symbols-outlined">location_on</span>
+            <div>
+              <strong>Local:</strong><br>
+              Centro de Convenções de Cuiabá
+            </div>
+          </div>
+          <div class="detail-item">
+            <span class="material-symbols-outlined">confirmation_number</span>
+            <div>
+              <strong>Código de Inscrição:</strong><br>
+              TCB2024-XXXXX
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div style="text-align: center; margin-top: 40px;">
+        <a href="index.html" class="btn-primary">Voltar para o Início</a>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+  <script>
+    // Account page specific functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      // This would normally fetch user data from backend
+      const contaUserName = document.getElementById('contaUserName');
+      const contaUserEmail = document.getElementById('contaUserEmail');
+      const contaStatus = document.getElementById('contaStatus');
+      
+      // Simulate user data
+      contaUserName.textContent = 'João Silva';
+      contaUserEmail.textContent = 'joao.silva@email.com';
+      contaStatus.textContent = 'Inscrito ✓';
+      contaStatus.style.color = '#10b981';
     });
   </script>
 </body>

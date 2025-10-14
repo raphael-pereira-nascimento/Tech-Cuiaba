@@ -4,199 +4,74 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cadastro - TechCuiabá</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f7ff;
-      margin: 0;
-      padding: 20px;
-      display: flex;
-      min-height: 100vh;
-    }
-    
-    .container {
-      max-width: 500px;
-      margin: auto;
-      background: white;
-      padding: 40px;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    }
-    
-    .logo {
-      text-align: center;
-      font-size: 24px;
-      font-weight: bold;
-      color: #2563eb;
-      margin-bottom: 30px;
-    }
-    
-    .form-group {
-      margin-bottom: 20px;
-    }
-    
-    .form-group label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: bold;
-      color: #333;
-    }
-    
-    .form-group input {
-      width: 100%;
-      padding: 12px;
-      border: 2px solid #ddd;
-      border-radius: 8px;
-      font-size: 16px;
-      transition: border-color 0.3s;
-    }
-    
-    .form-group input:focus {
-      outline: none;
-      border-color: #2563eb;
-    }
-    
-    .form-group input.error {
-      border-color: #ef4444;
-    }
-    
-    .btn {
-      width: 100%;
-      padding: 14px;
-      background: #2563eb;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    
-    .btn:hover {
-      background: #1d4ed8;
-    }
-    
-    .footer {
-      text-align: center;
-      margin-top: 20px;
-      color: #666;
-    }
-    
-    .footer a {
-      color: #2563eb;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    
-    .theme-toggle {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: #2563eb;
-      color: white;
-      border: none;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 18px;
-    }
-  </style>
+  <link rel="stylesheet" href="cadastro.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
 </head>
 <body>
-  <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
-  
-  <div class="container">
-    <div class="logo">TechCuiabá</div>
-    <h2 style="text-align: center; margin-bottom: 30px;">Cadastro</h2>
-    
-    <form id="cadastroForm">
-      <div class="form-group">
-        <label for="nome">Nome Completo</label>
-        <input type="text" id="nome" required>
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <div class="logo">TechCuiabá</div>
+        <h2>Cadastro</h2>
+        <p>Crie sua conta para o TechCuiabá 2024</p>
       </div>
-      <div class="form-group">
-        <label for="email">E-mail</label>
-        <input type="email" id="email" required>
+      
+      <form id="cadastroForm">
+        <div class="form-section">
+          <h3>Dados Pessoais</h3>
+          <div class="form-group">
+            <label for="cadastroNome">Nome Completo</label>
+            <input type="text" id="cadastroNome" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="cadastroEmail">E-mail</label>
+            <input type="email" id="cadastroEmail" class="form-control" required>
+          </div>
+        </div>
+        <div class="form-section">
+          <h3>Senha</h3>
+          <div class="form-group">
+            <label for="cadastroPassword">Senha</label>
+            <input type="password" id="cadastroPassword" class="form-control" required minlength="6">
+          </div>
+        </div>
+        <button type="submit" class="btn-primary">Cadastrar</button>
+      </form>
+      
+      <div class="auth-footer">
+        <p>Já tem conta? <a href="login.html">Faça login</a></p>
+        <a href="#" class="forgot-password-link">Esqueci minha senha</a>
       </div>
-      <div class="form-group">
-        <label for="senha">Senha</label>
-        <input type="password" id="senha" required minlength="6">
-      </div>
-      <div class="form-group">
-        <label for="confirmarSenha">Confirmar Senha</label>
-        <input type="password" id="confirmarSenha" required>
-      </div>
-      <button type="submit" class="btn">Cadastrar</button>
-    </form>
-    
-    <div class="footer">
-      <p>Já tem conta? <a href="login.html">Faça login</a></p>
     </div>
+    
+    <button class="theme-toggle" id="themeToggle">
+      <span class="material-symbols-outlined">light_mode</span>
+    </button>
   </div>
 
+  <script src="script.js"></script>
   <script>
-    // Tema simples
-    function toggleTheme() {
-      document.body.style.background = document.body.style.background === 'rgb(15, 23, 42)' ? '#f5f7ff' : '#0f172a';
-      document.body.style.color = document.body.style.color === 'rgb(241, 245, 249)' ? '#333' : '#f1f5f9';
-    }
-    
-    // Formulário de cadastro SIMPLES e FUNCIONAL
-    document.getElementById('cadastroForm').onsubmit = function(e) {
+    // Cadastro form specific functionality
+    document.getElementById('cadastroForm').addEventListener('submit', function(e) {
       e.preventDefault();
+      const nome = document.getElementById('cadastroNome').value;
+      const email = document.getElementById('cadastroEmail').value;
+      const password = document.getElementById('cadastroPassword').value;
       
-      const nome = document.getElementById('nome');
-      const email = document.getElementById('email');
-      const senha = document.getElementById('senha');
-      const confirmarSenha = document.getElementById('confirmarSenha');
-      
-      // Resetar erros
-      nome.classList.remove('error');
-      email.classList.remove('error');
-      senha.classList.remove('error');
-      confirmarSenha.classList.remove('error');
-      
-      let valido = true;
-      
-      // Validar nome
-      if (!nome.value.trim()) {
-        nome.classList.add('error');
-        valido = false;
-      }
-      
-      // Validar email
-      if (!email.value.includes('@')) {
-        email.classList.add('error');
-        valido = false;
-      }
-      
-      // Validar senha
-      if (senha.value.length < 6) {
-        senha.classList.add('error');
-        valido = false;
-      }
-      
-      // Validar confirmação de senha
-      if (senha.value !== confirmarSenha.value) {
-        confirmarSenha.classList.add('error');
-        valido = false;
-      }
-      
-      if (valido) {
-        // Salvar dados (simulado)
-        localStorage.setItem('usuario_techcuiaba', JSON.stringify({
-          nome: nome.value,
-          email: email.value
-        }));
-        
-        alert('Cadastro realizado com sucesso!');
-        window.location.href = 'conta.html';
+      if (email.includes('@') && password.length >= 6) {
+        // In a real app, this would save to backend
+        alert('Cadastro realizado com sucesso! Bem-vindo ao TechCuiabá!');
+        window.location.href = 'index.html';
       } else {
-        alert('Por favor, corrija os erros no formulário.');
+        alert('Por favor, verifique seus dados e tente novamente.');
       }
-    };
+    });
+    
+    document.querySelector('.forgot-password-link').addEventListener('click', function(e) {
+      e.preventDefault();
+      alert('Instruções de recuperação enviadas para seu e-mail!');
+    });
   </script>
 </body>
 </html>
