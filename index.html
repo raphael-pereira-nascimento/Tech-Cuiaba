@@ -3,10 +3,866 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TechCuiabá - Evento de Tecnologia</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <title>TechCuiabá 2025 | Inovação em Mato Grosso</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #1a1a1a;
+      --primary-color: #2563eb;
+      --primary-gradient: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+      --secondary-color: #f8fafc;
+      --accent-color: #0f172a;
+      --border-color: #e2e8f0;
+      --card-bg: #ffffff;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --radius-xs: 4px;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --radius-full: 9999px;
+      --transition-fast: 0.2s ease;
+      --transition-normal: 0.3s ease;
+      --transition-slow: 0.5s ease;
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #0f172a;
+      --text-color: #f1f5f9;
+      --primary-color: #60a5fa;
+      --primary-gradient: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+      --secondary-color: #1e293b;
+      --border-color: #334155;
+      --card-bg: #1e293b;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header Styles */
+    header {
+      background-color: var(--bg-color);
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    [data-theme="dark"] header {
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+    }
+
+    .logo {
+      font-size: 1.75rem;
+      font-weight: 700;
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text-color);
+      font-weight: 500;
+      position: relative;
+      padding: 8px 0;
+      transition: color var(--transition-fast);
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary-gradient);
+      transition: width var(--transition-normal);
+    }
+
+    nav a:hover {
+      color: var(--primary-color);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .user-info {
+      text-align: right;
+      display: none;
+    }
+
+    .user-name {
+      font-weight: 600;
+      font-size: 0.875rem;
+      display: block;
+      color: var(--text-color);
+    }
+
+    .user-email {
+      font-size: 0.75rem;
+      color: #94a3b8;
+      display: block;
+    }
+
+    /* Buttons */
+    .btn {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: all var(--transition-normal);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: var(--primary-gradient);
+      color: white;
+      padding: 12px 28px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--primary-color);
+      border: 2px solid var(--primary-color);
+      padding: 12px 28px;
+    }
+
+    .btn-outline:hover {
+      background: var(--primary-color);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .btn-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-color);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-icon:hover {
+      background: var(--secondary-color);
+      transform: translateY(-2px);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: var(--primary-gradient);
+      color: white;
+      padding: 80px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-text h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 3rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 24px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .hero-text p {
+      font-size: 1.25rem;
+      opacity: 0.9;
+      margin-bottom: 32px;
+      max-width: 500px;
+    }
+
+    .hero-image {
+      position: relative;
+    }
+
+    .hero-image img {
+      width: 100%;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-lg);
+      border: 4px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Section Base */
+    .section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      margin-bottom: 64px;
+      font-size: 2.5rem;
+      font-weight: 700;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--primary-gradient);
+      border-radius: var(--radius-full);
+    }
+
+    .section-subtitle {
+      text-align: center;
+      font-size: 1.125rem;
+      color: #64748b;
+      margin-bottom: 48px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Sobre Section */
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .about-image {
+      position: relative;
+    }
+
+    .about-image img {
+      width: 100%;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .about-text h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      color: var(--primary-color);
+    }
+
+    .about-text p {
+      margin-bottom: 24px;
+      font-size: 1.125rem;
+      line-height: 1.7;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      text-align: center;
+      box-shadow: var(--shadow-md);
+      transition: transform var(--transition-normal);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .stat-number {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-weight: 500;
+      color: #64748b;
+    }
+
+    /* Eventos Section */
+    .bg-light {
+      background-color: var(--secondary-color);
+    }
+
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 48px;
+    }
+
+    .event-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+    }
+
+    .event-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .event-image {
+      height: 220px;
+      overflow: hidden;
+    }
+
+    .event-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-normal);
+    }
+
+    .event-card:hover .event-image img {
+      transform: scale(1.05);
+    }
+
+    .event-info {
+      padding: 32px;
+    }
+
+    .event-info h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--text-color);
+    }
+
+    .event-info p {
+      margin-bottom: 24px;
+      color: #64748b;
+      line-height: 1.6;
+    }
+
+    .event-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .event-detail {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: #64748b;
+    }
+
+    .event-detail .material-symbols-outlined {
+      font-size: 1.25rem;
+      color: var(--primary-color);
+    }
+
+    /* Contato Section */
+    .contact-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .contact-card {
+      background: var(--card-bg);
+      padding: 32px;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-md);
+    }
+
+    .contact-card h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--primary-color);
+    }
+
+    .contact-card p {
+      color: #64748b;
+      line-height: 1.6;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .contact-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-lg);
+      background: var(--primary-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .contact-map {
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .contact-map img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--accent-color);
+      color: white;
+      padding: 64px 0 32px;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .footer-logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .footer-about p {
+      opacity: 0.8;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 12px;
+    }
+
+    .social-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      transition: background var(--transition-normal);
+    }
+
+    .social-btn:hover {
+      background: var(--primary-color);
+    }
+
+    .footer-links h4 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+      color: white;
+    }
+
+    .footer-links ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      transition: color var(--transition-normal);
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      opacity: 0.7;
+      font-size: 0.875rem;
+    }
+
+    /* Modals */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(5px);
+    }
+
+    .modal-content {
+      background: var(--card-bg);
+      padding: 40px;
+      border-radius: var(--radius-xl);
+      width: 90%;
+      max-width: 500px;
+      position: relative;
+      box-shadow: var(--shadow-lg);
+      transform: scale(0.9);
+      opacity: 0;
+      transition: transform var(--transition-normal), opacity var(--transition-normal);
+    }
+
+    .modal-content.show {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 24px;
+      cursor: pointer;
+      color: var(--text-color);
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition-normal);
+    }
+
+    .close:hover {
+      background: var(--secondary-color);
+    }
+
+    .modal-header h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text-color);
+    }
+
+    .modal-header p {
+      color: #64748b;
+      margin-bottom: 32px;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--text-color);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 16px;
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      background: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      transition: border-color var(--transition-normal);
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .form-section {
+      margin-bottom: 32px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .form-section:last-child {
+      border-bottom: none;
+      margin-bottom: 24px;
+      padding-bottom: 0;
+    }
+
+    .form-section h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+      color: var(--primary-color);
+    }
+
+    .modal-footer {
+      text-align: center;
+      margin-top: 24px;
+    }
+
+    .modal-footer-btn {
+      background: transparent;
+      color: var(--primary-color);
+      border: 2px solid var(--primary-color);
+      padding: 12px 24px;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition-normal);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .modal-footer-btn:hover {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .forgot-password {
+      text-align: center;
+      margin-top: 24px;
+    }
+
+    .forgot-password a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color var(--transition-normal);
+    }
+
+    .forgot-password a:hover {
+      color: #1d4ed8;
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero-text h1 {
+        font-size: 2.5rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-content {
+        padding: 12px 0;
+      }
+      
+      .logo {
+        font-size: 1.5rem;
+      }
+      
+      nav ul {
+        gap: 1rem;
+      }
+      
+      .hero {
+        padding: 60px 0;
+      }
+      
+      .hero-content {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      
+      .hero-text h1 {
+        font-size: 2rem;
+      }
+      
+      .hero-text p {
+        font-size: 1rem;
+      }
+      
+      .about-content,
+      .contact-content {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+      
+      .stats {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .events-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .section {
+        padding: 60px 0;
+      }
+      
+      .section-title {
+        font-size: 1.75rem;
+        margin-bottom: 48px;
+      }
+      
+      .user-info {
+        display: none;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-text h1 {
+        font-size: 1.75rem;
+      }
+      
+      .stats {
+        grid-template-columns: 1fr;
+      }
+      
+      .btn-primary,
+      .btn-outline {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+      }
+      
+      .modal-content {
+        padding: 30px 20px;
+        margin: 20px;
+      }
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-in-up {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+  </style>
 </head>
 <body>
   <header>
@@ -21,17 +877,10 @@
         </ul>
       </nav>
       <div class="header-right">
-        <div class="user-info-display">
-          <span class="user-name" id="userNameDisplay">Visitante</span>
-          <span class="user-email" id="userEmailDisplay">Não cadastrado</span>
-        </div>
-        <button class="account-icon-btn" id="openAccountBtn" title="Minha Conta">
+        <button class="btn-icon" id="openAccountBtn" title="Minha Conta">
           <span class="material-symbols-outlined">account_circle</span>
         </button>
-        <button class="login-btn" id="openLoginBtn">Login</button>
-        <button class="theme-toggle" id="themeToggle">
-          <span class="material-symbols-outlined">light_mode</span>
-        </button>
+        <button class="btn-primary" id="openLoginBtn">Login</button>
       </div>
     </div>
   </header>
@@ -42,47 +891,214 @@
       <div class="hero-content">
         <div class="hero-text">
           <h1>TechCuiabá 2025</h1>
-          <p>O maior evento de tecnologia e inovação do Centro-Oeste chega a Cuiabá!</p>
-          <button class="btn-register" id="openCadastroBtn">Inscreva-se Agora</button>
+          <p>O maior evento de tecnologia e inovação do Centro-Oeste chega a Cuiabá com palestras internacionais, workshops práticos e networking de alto nível!</p>
+          <button class="btn-primary" id="openCadastroBtn">Inscreva-se Agora</button>
         </div>
-        <div>
-          <img src="img/gopr0005.mp4.16_49_29_09.still008.webp" alt="Ponte do Rio Cuiabá">
+        <div class="hero-image">
+          <img src="img/por-do-sol-drone-de-cuiaba.png" alt="Evento TechCuiabá">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção Sobre -->
+  <section class="section" id="sobre">
+    <div class="container">
+      <h2 class="section-title">Sobre o TechCuiabá</h2>
+      <p class="section-subtitle">Conectando inovação, tecnologia e talentos em Mato Grosso</p>
+      <div class="about-content">
+        <div class="about-image">
+          <img src="img/" alt="Inovação em Mato Grosso">
+        </div>
+        <div class="about-text">
+          <h3>Impulsionando o Ecossistema de Inovação</h3>
+          <p>O <strong>TechCuiabá</strong> nasceu com o propósito de impulsionar o ecossistema de inovação em Mato Grosso, conectando startups, empresas, universidades e entusiastas da tecnologia em um ambiente colaborativo e inspirador.</p>
+          <p>Nossa missão é transformar Cuiabá em um polo tecnológico do Centro-Oeste, promovendo conhecimento, networking e oportunidades reais de crescimento profissional e empresarial através de eventos de alta qualidade.</p>
+          
+          <div class="stats">
+            <div class="stat-card">
+              <span class="stat-number">500+</span>
+              <span class="stat-label">Participantes</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number">50+</span>
+              <span class="stat-label">Palestrantes</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number">30+</span>
+              <span class="stat-label">Startups</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Seção Eventos -->
-  <section class="section" id="eventos">
+  <section class="section bg-light" id="eventos">
     <div class="container">
-      <h2 class="section-title">Nossos Eventos</h2>
+      <h2 class="section-title">Próximos Eventos</h2>
+      <p class="section-subtitle">Participe dos nossos eventos e conecte-se com o ecossistema de inovação</p>
       <div class="events-grid">
         <div class="event-card">
-          <img src="img/1759240303.png" alt="Centro Histórico de Cuiabá">
+          <div class="event-image">
+            <img src="img/1759244029.png" alt="Tech Summit 2024">
+          </div>
           <div class="event-info">
             <h3>TechCuiabá Summit 2025</h3>
-            <p>Evento principal com palestras internacionais no coração de Cuiabá.</p>
-            <button class="btn-event" id="openCadastroBtn2">Inscreva-se</button>
+            <p>Um dia inteiro de imersão em tecnologia, inovação e empreendedorismo com especialistas nacionais e internacionais.</p>
+            <div class="event-meta">
+              <div class="event-detail">
+                <span class="material-symbols-outlined">calendar_today</span>
+                <span>15 de Novembro de 2025</span>
+              </div>
+              <div class="event-detail">
+                <span class="material-symbols-outlined">location_on</span>
+                <span>Centro de Convenções de Cuiabá</span>
+              </div>
+              <div class="event-detail">
+                <span class="material-symbols-outlined">schedule</span>
+                <span>08:00 - 18:00</span>
+              </div>
+            </div>
+            <button class="btn-outline" id="openCadastroBtn2">Inscreva-se</button>
           </div>
         </div>
         <div class="event-card">
-          <img src="img/1759244029.png" alt="Universidade Federal de Mato Grosso">
+          <div class="event-image">
+            <img src="https://placehold.co/400x250/7c3aed/white?text=Workshop+IA" alt="Workshop de Inteligência Artificial">
+          </div>
           <div class="event-info">
             <h3>Workshop: IA Generativa</h3>
-            <p>Workshop prático na UFMT com especialistas em inteligência artificial.</p>
-            <button class="btn-event" id="openCadastroBtn3">Inscreva-se</button>
+            <p>Aprenda a criar soluções com inteligência artificial generativa em um workshop prático e hands-on com especialistas do mercado.</p>
+            <div class="event-meta">
+              <div class="event-detail">
+                <span class="material-symbols-outlined">calendar_today</span>
+                <span>22 de Outubro de 2025</span>
+              </div>
+              <div class="event-detail">
+                <span class="material-symbols-outlined">location_on</span>
+                <span>IFMT - Cuiabá</span>
+              </div>
+              <div class="event-detail">
+                <span class="material-symbols-outlined">schedule</span>
+                <span>14:00 - 18:00</span>
+              </div>
+            </div>
+            <button class="btn-outline" id="openCadastroBtn3">Inscreva-se</button>
           </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Seção Contato -->
+  <section class="section" id="contato">
+    <div class="container">
+      <h2 class="section-title">Entre em Contato</h2>
+      <p class="section-subtitle">Estamos prontos para atender você e sua empresa</p>
+      <div class="contact-content">
+        <div class="contact-info">
+          <div class="contact-card">
+            <div class="contact-item">
+              <div class="contact-icon">
+                <span class="material-symbols-outlined">email</span>
+              </div>
+              <div>
+                <h3>E-mail</h3>
+                <p>contato@techcuiaba.com.br</p>
+              </div>
+            </div>
+          </div>
+          <div class="contact-card">
+            <div class="contact-item">
+              <div class="contact-icon">
+                <span class="material-symbols-outlined">call</span>
+              </div>
+              <div>
+                <h3>Telefone</h3>
+                <p>(65) 99999-8888</p>
+              </div>
+            </div>
+          </div>
+          <div class="contact-card">
+            <div class="contact-item">
+              <div class="contact-icon">
+                <span class="material-symbols-outlined">location_on</span>
+              </div>
+              <div>
+                <h3>Endereço</h3>
+                <p>Avenida Isaac Póvoas, 1234<br>Cuiabá - MT, 78000-000</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="contact-map">
+          <img src="https://placehold.co/600x400/e2e8f0/64748b?text=Centro+de+Cuiabá" alt="Localização em Cuiabá">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-about">
+          <div class="footer-logo">TechCuiabá</div>
+          <p>O maior evento de tecnologia e inovação do Centro-Oeste, conectando talentos e oportunidades em Mato Grosso.</p>
+          <div class="footer-social">
+            <a href="#" class="social-btn">
+              <span class="material-symbols-outlined">camera_alt</span>
+            </a>
+            <a href="#" class="social-btn">
+              <span class="material-symbols-outlined">play_circle</span>
+            </a>
+            <a href="#" class="social-btn">
+              <span class="material-symbols-outlined">x</span>
+            </a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Empresa</h4>
+          <ul>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#eventos">Eventos</a></li>
+            <li><a href="#">Imprensa</a></li>
+            <li><a href="#">Carreiras</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Recursos</h4>
+          <ul>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Comunidade</a></li>
+            <li><a href="#">Parceiros</a></li>
+            <li><a href="#">Patrocinadores</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Suporte</h4>
+          <ul>
+            <li><a href="#contato">Contato</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Termos</a></li>
+            <li><a href="#">Privacidade</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>&copy; 2025 TechCuiabá. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
   <!-- Modal de Conta -->
   <div id="contaModal" class="modal">
     <div class="modal-content">
-      <button class="close-modal" id="closeContaModal">&times;</button>
+      <span class="close" id="closeContaModal">&times;</span>
       <div class="modal-header">
         <h2>Minha Conta</h2>
+        <p>Informações da sua inscrição e detalhes do evento</p>
       </div>
       <div class="account-content">
         <div class="user-info">
@@ -124,7 +1140,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn-secondary" id="contaToLoginBtn">Fazer Login</button>
+        <button class="modal-footer-btn" id="contaToLoginBtn">Fazer Login</button>
       </div>
     </div>
   </div>
@@ -132,9 +1148,10 @@
   <!-- Modal de Login -->
   <div id="loginModal" class="modal">
     <div class="modal-content">
-      <button class="close-modal" id="closeLoginModal">&times;</button>
+      <span class="close" id="closeLoginModal">&times;</span>
       <div class="modal-header">
-        <h2>Login - TechCuiabá</h2>
+        <h2>Login</h2>
+        <p>Acesse sua conta no TechCuiabá</p>
       </div>
       <form id="loginForm">
         <div class="form-group">
@@ -145,10 +1162,10 @@
           <label for="loginPassword">Senha</label>
           <input type="password" id="loginPassword" class="form-control" required>
         </div>
-        <button type="submit" class="btn-submit">Entrar</button>
+        <button type="submit" class="btn-primary" style="width: 100%;">Entrar</button>
       </form>
       <div class="modal-footer">
-        <button class="btn-secondary" id="loginToCadastroBtn">Cadastre-se</button>
+        <button class="modal-footer-btn" id="loginToCadastroBtn">Cadastre-se</button>
       </div>
     </div>
   </div>
@@ -156,9 +1173,10 @@
   <!-- Modal de Cadastro -->
   <div id="cadastroModal" class="modal">
     <div class="modal-content">
-      <button class="close-modal" id="closeCadastroModal">&times;</button>
+      <span class="close" id="closeCadastroModal">&times;</span>
       <div class="modal-header">
-        <h2>Cadastro - TechCuiabá</h2>
+        <h2>Cadastro</h2>
+        <p>Crie sua conta para o TechCuiabá 2025</p>
       </div>
       <form id="cadastroForm">
         <div class="form-section">
@@ -179,21 +1197,15 @@
             <input type="password" id="cadastroPassword" class="form-control" required minlength="6">
           </div>
         </div>
-        <button type="submit" class="btn-submit">Cadastrar</button>
+        <button type="submit" class="btn-primary" style="width: 100%;">Cadastrar</button>
       </form>
       <div class="modal-footer">
-        <button class="btn-secondary" id="cadastroToLoginBtn">Já tem conta? Faça login</button>
+        <button class="modal-footer-btn" id="cadastroToLoginBtn">Já tem conta? Faça login</button>
       </div>
-      <div class="forgot-password-section">
+      <div class="forgot-password">
         <a href="#" id="esqueciSenhaLink">Esqueci minha senha</a>
       </div>
     </div>
-  </div>
-
-  <!-- Toast Notification -->
-  <div id="toast" class="toast">
-    <span class="material-symbols-outlined">check_circle</span>
-    <span>Operação realizada com sucesso!</span>
   </div>
 
   <script>
@@ -205,29 +1217,6 @@
     
     // Atualizar interface
     function atualizarInterface() {
-      document.getElementById('userNameDisplay').textContent = usuarioAtual.nome;
-      document.getElementById('userEmailDisplay').textContent = usuarioAtual.email;
-    }
-    
-    // Abrir modais
-    document.getElementById('openCadastroBtn').onclick = function() {
-      document.getElementById('cadastroModal').style.display = 'flex';
-    };
-    
-    document.getElementById('openCadastroBtn2').onclick = function() {
-      document.getElementById('cadastroModal').style.display = 'flex';
-    };
-    
-    document.getElementById('openCadastroBtn3').onclick = function() {
-      document.getElementById('cadastroModal').style.display = 'flex';
-    };
-    
-    document.getElementById('openLoginBtn').onclick = function() {
-      document.getElementById('loginModal').style.display = 'flex';
-    };
-    
-    document.getElementById('openAccountBtn').onclick = function() {
-      // Atualizar dados do modal de conta
       document.getElementById('contaUserName').textContent = usuarioAtual.nome;
       document.getElementById('contaUserEmail').textContent = usuarioAtual.email;
       
@@ -239,43 +1228,59 @@
         contaStatus.textContent = 'Não inscrito';
         contaStatus.style.color = '#ef4444';
       }
-      
-      document.getElementById('contaModal').style.display = 'flex';
+    }
+    
+    // Abrir modais com animação
+    function openModal(modalId) {
+      const modal = document.getElementById(modalId);
+      modal.style.display = 'flex';
+      setTimeout(() => {
+        modal.querySelector('.modal-content').classList.add('show');
+      }, 10);
+    }
+    
+    function closeModal(modalId) {
+      const modal = document.getElementById(modalId);
+      modal.querySelector('.modal-content').classList.remove('show');
+      setTimeout(() => {
+        modal.style.display = 'none';
+      }, 300);
+    }
+    
+    // Event listeners para botões
+    document.getElementById('openCadastroBtn').onclick = () => openModal('cadastroModal');
+    document.getElementById('openCadastroBtn2').onclick = () => openModal('cadastroModal');
+    document.getElementById('openCadastroBtn3').onclick = () => openModal('cadastroModal');
+    document.getElementById('openLoginBtn').onclick = () => openModal('loginModal');
+    document.getElementById('openAccountBtn').onclick = () => {
+      atualizarInterface();
+      openModal('contaModal');
     };
     
     // Fechar modais
-    document.getElementById('closeContaModal').onclick = function() {
-      document.getElementById('contaModal').style.display = 'none';
-    };
-    
-    document.getElementById('closeLoginModal').onclick = function() {
-      document.getElementById('loginModal').style.display = 'none';
-    };
-    
-    document.getElementById('closeCadastroModal').onclick = function() {
-      document.getElementById('cadastroModal').style.display = 'none';
-    };
+    document.getElementById('closeContaModal').onclick = () => closeModal('contaModal');
+    document.getElementById('closeLoginModal').onclick = () => closeModal('loginModal');
+    document.getElementById('closeCadastroModal').onclick = () => closeModal('cadastroModal');
     
     // Navegação entre modais
-    document.getElementById('contaToLoginBtn').onclick = function() {
-      document.getElementById('contaModal').style.display = 'none';
-      document.getElementById('loginModal').style.display = 'flex';
+    document.getElementById('contaToLoginBtn').onclick = () => {
+      closeModal('contaModal');
+      openModal('loginModal');
     };
     
-    document.getElementById('loginToCadastroBtn').onclick = function() {
-      document.getElementById('loginModal').style.display = 'none';
-      document.getElementById('cadastroModal').style.display = 'flex';
+    document.getElementById('loginToCadastroBtn').onclick = () => {
+      closeModal('loginModal');
+      openModal('cadastroModal');
     };
     
-    document.getElementById('cadastroToLoginBtn').onclick = function() {
-      document.getElementById('cadastroModal').style.display = 'none';
-      document.getElementById('loginModal').style.display = 'flex';
+    document.getElementById('cadastroToLoginBtn').onclick = () => {
+      closeModal('cadastroModal');
+      openModal('loginModal');
     };
     
     // Formulário de cadastro
     document.getElementById('cadastroForm').onsubmit = function(e) {
       e.preventDefault();
-      
       const nome = document.getElementById('cadastroNome');
       const email = document.getElementById('cadastroEmail');
       const password = document.getElementById('cadastroPassword');
@@ -286,21 +1291,17 @@
           email: email.value
         };
         atualizarInterface();
-        
-        document.getElementById('toast').classList.add('show');
-        setTimeout(() => {
-          document.getElementById('toast').classList.remove('show');
-        }, 3000);
-        
-        document.getElementById('cadastroModal').style.display = 'none';
+        alert('Cadastro realizado com sucesso! Bem-vindo ao TechCuiabá!');
+        closeModal('cadastroModal');
         this.reset();
+      } else {
+        alert('Por favor, verifique seus dados e tente novamente.');
       }
     };
     
     // Formulário de login
     document.getElementById('loginForm').onsubmit = function(e) {
       e.preventDefault();
-      
       const email = document.getElementById('loginEmail');
       
       if (email.value.includes('@')) {
@@ -309,42 +1310,63 @@
           email: email.value
         };
         atualizarInterface();
-        
-        document.getElementById('toast').classList.add('show');
-        setTimeout(() => {
-          document.getElementById('toast').classList.remove('show');
-        }, 3000);
-        
-        document.getElementById('loginModal').style.display = 'none';
+        alert('Login realizado com sucesso!');
+        closeModal('loginModal');
         this.reset();
+      } else {
+        alert('E-mail inválido!');
       }
     };
     
     // Esqueci minha senha
     document.getElementById('esqueciSenhaLink').onclick = function(e) {
       e.preventDefault();
-      alert('Instruções de recuperação enviadas para seu e-mail!');
+      alert('Instruções de recuperação de senha enviadas para seu e-mail!');
     };
     
     // Fechar modais ao clicar fora
     window.onclick = function(e) {
-      if (e.target.className === 'modal') {
-        e.target.style.display = 'none';
+      if (e.target.classList.contains('modal')) {
+        const modalId = e.target.id;
+        closeModal(modalId);
       }
     };
     
-    // Theme toggle
-    document.getElementById('themeToggle').onclick = function() {
-      const current = document.body.getAttribute('data-theme') || 'light';
-      const newTheme = current === 'light' ? 'dark' : 'light';
-      document.body.setAttribute('data-theme', newTheme);
-      
-      const icon = newTheme === 'dark' ? 'dark_mode' : 'light_mode';
-      this.innerHTML = `<span class="material-symbols-outlined">${icon}</span>`;
-    };
+    // Navegação suave
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+          const headerHeight = document.querySelector('header')?.offsetHeight || 0;
+          const targetPosition = targetElement.offsetTop - headerHeight;
+          
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
     
     // Inicializar
     atualizarInterface();
+    
+    // Adicionar animações ao rolar
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fade-in-up');
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    document.querySelectorAll('.section').forEach((section, index) => {
+      section.classList.add(`delay-${index + 1}`);
+      observer.observe(section);
+    });
   </script>
 </body>
 </html>
