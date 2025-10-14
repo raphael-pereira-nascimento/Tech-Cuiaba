@@ -3,51 +3,88 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cadastro - TechCuiabá</title>
-  <link rel="stylesheet" href="cadastro.css">
+  <title>Minha Conta - TechCuiabá</title>
+  <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
 </head>
 <body>
-  <div class="auth-container">
-    <div class="auth-card">
-      <div class="auth-header">
-        <h2>Cadastro</h2>
-        <p>Crie sua conta para o TechCuiabá 2024</p>
-      </div>
-      <form id="cadastroForm">
-        <div class="form-section">
-          <h3>Dados Pessoais</h3>
-          <div class="form-group">
-            <label for="cadastroNome">Nome Completo</label>
-            <input type="text" id="cadastroNome" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label for="cadastroEmail">E-mail</label>
-            <input type="email" id="cadastroEmail" class="form-control" required>
-          </div>
-        </div>
-        <div class="form-section">
-          <h3>Senha</h3>
-          <div class="form-group">
-            <label for="cadastroPassword">Senha</label>
-            <input type="password" id="cadastroPassword" class="form-control" required minlength="6">
-          </div>
-        </div>
-        <button type="submit" class="btn-primary" style="width: 100%;">Cadastrar</button>
-      </form>
-      <div class="auth-footer">
-        <button class="auth-footer-btn" onclick="window.location.href='login.html'">Já tem conta? Faça login</button>
-      </div>
-      <div class="forgot-password">
-        <a href="#" id="esqueciSenhaLink">Esqueci minha senha</a>
+  <header>
+    <div class="container header-content">
+      <div class="logo">TechCuiabá</div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="index.html#sobre">Sobre</a></li>
+          <li><a href="index.html#eventos">Eventos</a></li>
+          <li><a href="index.html#contato">Contato</a></li>
+        </ul>
+      </nav>
+      <div class="header-right">
+        <a href="login.html" class="btn-primary">Login</a>
+        <button class="theme-toggle" id="themeToggle">
+          <span class="material-symbols-outlined">light_mode</span>
+        </button>
       </div>
     </div>
-  </div>
+  </header>
 
-  <button class="theme-toggle auth-theme-toggle" id="themeToggle">
-    <span class="material-symbols-outlined">light_mode</span>
-  </button>
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Minha Conta</h2>
+      <p class="section-subtitle">Informações da sua inscrição e detalhes do evento</p>
+      
+      <div class="about-content">
+        <div class="about-text">
+          <h3>Dados do Participante</h3>
+          <div class="stat-card" style="margin-bottom: 24px;">
+            <p><strong>Nome:</strong> João Silva Oliveira</p>
+            <p><strong>E-mail:</strong> joao.silva@email.com</p>
+            <p><strong>Instituição:</strong> Universidade Federal de Mato Grosso</p>
+            <p><strong>Status:</strong> <span style="color: #10b981;">Inscrito ✓</span></p>
+          </div>
+        </div>
+        <div class="about-image">
+          <img src="https://placehold.co/500x350/2563eb/white?text=TechCuiabá+2024" alt="TechCuiabá 2024">
+        </div>
+      </div>
+
+      <div class="events-grid" style="margin-top: 48px;">
+        <div class="event-card">
+          <div class="event-info">
+            <h3>TechCuiabá Summit 2024</h3>
+            <div class="event-meta">
+              <div class="event-detail">
+                <span class="material-symbols-outlined">calendar_month</span>
+                <span>15 de Novembro de 2024</span>
+              </div>
+              <div class="event-detail">
+                <span class="material-symbols-outlined">schedule</span>
+                <span>08:00 - 18:00</span>
+              </div>
+              <div class="event-detail">
+                <span class="material-symbols-outlined">location_on</span>
+                <span>Centro de Convenções de Cuiabá</span>
+              </div>
+              <div class="event-detail">
+                <span class="material-symbols-outlined">confirmation_number</span>
+                <span>Código: TCB2024-789456</span>
+              </div>
+            </div>
+            <p style="margin-top: 24px; color: #64748b;">Apresente este código no credenciamento do evento.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="copyright">
+        <p>&copy; 2024 TechCuiabá. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
 
   <script src="script.js"></script>
 </body>

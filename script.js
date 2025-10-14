@@ -1,26 +1,51 @@
+// Theme management
 document.addEventListener("DOMContentLoaded", function () {
-  // Aplicar tema salvo
+  const themeToggle = document.getElementById("themeToggle");
+
+  // Load saved theme
   const savedTheme = localStorage.getItem("theme") || "light";
   document.body.setAttribute("data-theme", savedTheme);
 
-  // Atualizar ícone do tema
-  const themeToggle = document.getElementById("themeToggle");
-  if (themeToggle) {
-    const icon = savedTheme === "dark" ? "dark_mode" : "light_mode";
-    themeToggle.innerHTML = `<span class="material-symbols-outlined">${icon}</span>`;
-  }
+  // Update icon
+  updateThemeIcon(savedTheme);
 
-  // Alternar tema
+  // Theme toggle functionality
   if (themeToggle) {
     themeToggle.addEventListener("click", function () {
-      const current = document.body.getAttribute("data-theme") || "light";
-      const newTheme = current === "light" ? "dark" : "light";
+      const currentTheme = document.body.getAttribute("data-theme") || "light";
+      const newTheme = currentTheme === "light" ? "dark" : "light";
 
       document.body.setAttribute("data-theme", newTheme);
       localStorage.setItem("theme", newTheme);
-
-      const icon = newTheme === "dark" ? "dark_mode" : "light_mode";
-      this.innerHTML = `<span class="material-symbols-outlined">${icon}</span>`;
+      updateThemeIcon(newTheme);
     });
   }
+
+  // Smooth scrolling for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+      const targetId = this.getAttribute("href");
+      const targetElement = document.querySelector(targetId);
+
+      if (targetElement) {
+        const headerHeight =
+          document.querySelector("header")?.offsetHeight || 0;
+        const targetPosition = targetElement.offsetTop - headerHeight;
+
+        window.scrollTo({
+          top: targetPosition,
+          behavior: "smooth",
+        });
+      }
+    });
+  });
 });
+
+function updateThemeIcon(theme) {
+  const themeToggle = document.getElementById("themeToggle");
+  if (themeToggle) {
+    const icon = theme === "dark" ? "dark_mode" : "light_mode";
+    themeToggle.innerHTML = `<span class="material-symbols-outlined">${icon}</span>`;
+  }
+}

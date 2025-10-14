@@ -2,24 +2,28 @@
   --bg-color: #ffffff;
   --text-color: #1a1a1a;
   --primary-color: #2563eb;
-  --secondary-color: #f1f5f9;
+  --primary-gradient: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+  --secondary-color: #f8fafc;
   --border-color: #e2e8f0;
-  --error-color: #ef4444;
   --card-bg: #ffffff;
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --radius: 12px;
-  --spacing-sm: 0.5rem;
-  --spacing-md: 1rem;
-  --spacing-lg: 2rem;
-  --font-size-sm: 0.875rem;
-  --font-size-md: 1rem;
-  --font-size-lg: 1.25rem;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
 }
 
 [data-theme="dark"] {
   --bg-color: #0f172a;
   --text-color: #f1f5f9;
   --primary-color: #60a5fa;
+  --primary-gradient: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
   --secondary-color: #1e293b;
   --border-color: #334155;
   --card-bg: #1e293b;
@@ -32,152 +36,178 @@
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Inter', sans-serif;
   background-color: var(--bg-color);
   color: var(--text-color);
-  transition: background-color 0.3s, color 0.3s;
   line-height: 1.6;
-}
-
-.theme-toggle {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1.5rem;
-  color: var(--text-color);
-  transition: color 0.2s;
-}
-
-.theme-toggle:hover {
-  color: var(--primary-color);
+  display: flex;
+  min-height: 100vh;
 }
 
 .auth-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  padding: var(--spacing-lg);
+  flex: 1;
+  padding: 20px;
 }
 
 .auth-card {
   background: var(--card-bg);
-  padding: var(--spacing-lg);
-  border-radius: var(--radius);
+  padding: 40px;
+  border-radius: var(--radius-xl);
   width: 100%;
   max-width: 450px;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-lg);
 }
 
-.auth-header {
-  text-align: center;
-  margin-bottom: var(--spacing-lg);
+.logo {
+  font-size: 1.75rem;
+  font-weight: 700;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 24px;
 }
 
 .auth-header h2 {
-  font-size: var(--font-size-lg);
-  margin-bottom: var(--spacing-sm);
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text-color);
+}
+
+.auth-header p {
+  color: #64748b;
+  margin-bottom: 32px;
+}
+
+.form-section {
+  margin-bottom: 32px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.form-section:last-child {
+  border-bottom: none;
+  margin-bottom: 24px;
+  padding-bottom: 0;
+}
+
+.form-section h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: var(--primary-color);
 }
 
 .form-group {
-  margin-bottom: var(--spacing-md);
+  margin-bottom: 24px;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: 8px;
   font-weight: 500;
+  color: var(--text-color);
 }
 
 .form-control {
   width: 100%;
-  padding: 0.75rem;
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius);
+  padding: 16px;
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-lg);
   background: var(--bg-color);
   color: var(--text-color);
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  transition: border-color var(--transition-normal);
 }
 
 .form-control:focus {
   outline: none;
   border-color: var(--primary-color);
-}
-
-.form-control.error {
-  border-color: var(--error-color);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
 .btn-primary {
-  width: 100%;
-  padding: 0.75rem;
-  background: var(--primary-color);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  background: var(--primary-gradient);
   color: white;
   border: none;
-  border-radius: var(--radius);
-  font-weight: 600;
+  border-radius: var(--radius-full);
+  padding: 12px 28px;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all var(--transition-normal);
+  box-shadow: var(--shadow-md);
 }
 
 .btn-primary:hover {
-  background: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
 }
 
 .auth-footer {
   text-align: center;
-  margin-top: var(--spacing-md);
+  margin-top: 24px;
 }
 
 .auth-footer a {
   color: var(--primary-color);
   text-decoration: none;
+  font-weight: 500;
+  transition: color var(--transition-normal);
 }
 
 .auth-footer a:hover {
+  color: #1d4ed8;
   text-decoration: underline;
 }
 
-/* Toast Styles */
-.toast {
+/* Theme Toggle */
+.theme-toggle {
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  background: var(--primary-color);
-  color: white;
-  padding: 1rem;
-  border-radius: var(--radius);
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  box-shadow: var(--shadow);
-  transform: translateX(120%);
-  transition: transform 0.3s ease-out;
-  z-index: 1000;
+  justify-content: center;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: background var(--transition-normal);
+  z-index: 100;
 }
 
-.toast.show {
-  transform: translateX(0);
-}
-
-.toast .material-symbols-outlined {
-  font-size: 1.5rem;
+.theme-toggle:hover {
+  background: var(--secondary-color);
 }
 
 /* Responsive */
-@media (max-width: 768px) {
-  .toast {
-    bottom: 1rem;
-    right: 1rem;
-    left: 1rem;
-    width: auto;
-    transform: translateY(120%);
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 30px 20px;
+    margin: 10px;
   }
   
-  .toast.show {
-    transform: translateY(0);
+  .logo {
+    margin-bottom: 20px;
+  }
+  
+  .auth-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .form-section {
+    margin-bottom: 24px;
+    padding-bottom: 24px;
   }
 }

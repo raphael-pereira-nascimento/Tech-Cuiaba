@@ -12,6 +12,7 @@
   <div class="auth-container">
     <div class="auth-card">
       <div class="auth-header">
+        <div class="logo">TechCuiabá</div>
         <h2>Login</h2>
         <p>Acesse sua conta no TechCuiabá</p>
       </div>
@@ -27,15 +28,37 @@
         <button type="submit" class="btn-primary" style="width: 100%;">Entrar</button>
       </form>
       <div class="auth-footer">
-        <button class="auth-footer-btn" onclick="window.location.href='cadastro.html'">Cadastre-se</button>
+        <p>Não tem conta? <a href="cadastro.html">Cadastre-se</a></p>
+        <a href="#" class="forgot-password">Esqueci minha senha</a>
       </div>
     </div>
   </div>
 
-  <button class="theme-toggle auth-theme-toggle" id="themeToggle">
+  <button class="theme-toggle" id="themeToggle">
     <span class="material-symbols-outlined">light_mode</span>
   </button>
 
   <script src="script.js"></script>
+  <script>
+    // Login form validation
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail');
+      const password = document.getElementById('loginPassword');
+      
+      if (email.value.includes('@') && password.value.length >= 6) {
+        alert('Login realizado com sucesso!');
+        window.location.href = 'conta.html';
+      } else {
+        alert('Por favor, verifique seus dados e tente novamente.');
+      }
+    });
+    
+    // Esqueci minha senha
+    document.querySelector('.forgot-password').addEventListener('click', function(e) {
+      e.preventDefault();
+      alert('Instruções de recuperação de senha enviadas para seu e-mail!');
+    });
+  </script>
 </body>
 </html>

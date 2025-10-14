@@ -40,14 +40,15 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   line-height: 1.6;
-  transition: background-color var(--transition-normal), color var(--transition-normal);
+  display: flex;
+  min-height: 100vh;
 }
 
 .auth-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  flex: 1;
   padding: 20px;
 }
 
@@ -56,13 +57,18 @@ body {
   padding: 40px;
   border-radius: var(--radius-xl);
   width: 100%;
-  max-width: 500px;
+  max-width: 450px;
   box-shadow: var(--shadow-lg);
 }
 
-.auth-header {
-  text-align: center;
-  margin-bottom: 32px;
+.logo {
+  font-size: 1.75rem;
+  font-weight: 700;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 24px;
 }
 
 .auth-header h2 {
@@ -75,6 +81,7 @@ body {
 
 .auth-header p {
   color: #64748b;
+  margin-bottom: 32px;
 }
 
 .form-group {
@@ -129,21 +136,31 @@ body {
   margin-top: 24px;
 }
 
-.auth-footer-btn {
-  background: transparent;
+.auth-footer a {
   color: var(--primary-color);
-  border: 2px solid var(--primary-color);
-  padding: 12px 24px;
-  border-radius: var(--radius-full);
-  font-weight: 600;
-  cursor: pointer;
-  transition: all var(--transition-normal);
-  font-family: 'Poppins', sans-serif;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--transition-normal);
 }
 
-.auth-footer-btn:hover {
-  background: var(--primary-color);
-  color: white;
+.auth-footer a:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+.forgot-password {
+  display: block;
+  text-align: center;
+  margin-top: 16px;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--transition-normal);
+}
+
+.forgot-password:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
 }
 
 /* Theme Toggle */
@@ -169,9 +186,18 @@ body {
   background: var(--secondary-color);
 }
 
+/* Responsive */
 @media (max-width: 480px) {
   .auth-card {
     padding: 30px 20px;
-    margin: 20px;
+    margin: 10px;
+  }
+  
+  .logo {
+    margin-bottom: 20px;
+  }
+  
+  .auth-header h2 {
+    font-size: 1.5rem;
   }
 }
