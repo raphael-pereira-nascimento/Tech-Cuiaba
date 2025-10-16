@@ -170,3 +170,25 @@ body {
 .theme-toggle:hover {
   background: var(--secondary-color);
 }
+
+/* Close button for auth pages */
+.close-page-btn {
+  position: absolute;
+  top: 20px;
+  right: 70px;
+  background: none;
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color);
+  cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.close-page-btn:hover {
+  background: var(--secondary-color);
+}

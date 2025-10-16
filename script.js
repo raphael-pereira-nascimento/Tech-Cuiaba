@@ -1,8 +1,68 @@
-// Estado do usuário (em um ambiente real, viria do backend)
+// Estado do usuário
 let usuarioAtual = {
   nome: "Visitante",
   email: "Não cadastrado",
 };
+
+// Toast management
+function showToast(message, type = "success") {
+  // Remove existing toast
+  const existingToast = document.getElementById("toast");
+  if (existingToast) {
+    existingToast.remove();
+  }
+
+  // Create toast element
+  const toast = document.createElement("div");
+  toast.id = "toast";
+  toast.className = `toast toast-${type}`;
+
+  // Set icon based on type
+  const icon = type === "success" ? "check_circle" : "error";
+  const color = type === "success" ? "#10b981" : "#ef4444";
+
+  toast.innerHTML = `
+    <span class="material-symbols-outlined" style="color: white;">${icon}</span>
+    <span>${message}</span>
+  `;
+
+  // Style the toast
+  Object.assign(toast.style, {
+    position: "fixed",
+    bottom: "20px",
+    right: "20px",
+    background: color,
+    color: "white",
+    padding: "16px 24px",
+    borderRadius: "12px",
+    display: "flex",
+    alignItems: "center",
+    gap: "12px",
+    boxShadow: "0 10px 25px -5px rgba(0,0,0,0.3)",
+    transform: "translateX(120%)",
+    transition: "transform 0.3s ease-out",
+    zIndex: "2000",
+    fontFamily: "'Inter', sans-serif",
+    fontWeight: "500",
+  });
+
+  document.body.appendChild(toast);
+
+  // Animate in
+  setTimeout(() => {
+    toast.style.transform = "translateX(0)";
+  }, 100);
+
+  // Auto remove after 3 seconds
+  setTimeout(() => {
+    toast.style.transform = "translateX(120%)";
+    setTimeout(() => {
+      if (toast.parentNode) {
+        toast.parentNode.removeChild(toast);
+      }
+    }, 300);
+  }, 3000);
+}
 
 // Tema management
 function setTheme(theme) {
@@ -62,6 +122,11 @@ function closeModal(modalId) {
       modal.style.display = "none";
     }, 300);
   }
+}
+
+// Close modal function for external pages
+function closePage() {
+  window.history.back();
 }
 
 // Event listeners
@@ -155,11 +220,17 @@ document.addEventListener("DOMContentLoaded", function () {
           email: email.value,
         };
         atualizarInterface();
-        alert("Cadastro realizado com sucesso! Bem-vindo ao TechCuiabá!");
+        showToast(
+          "Cadastro realizado com sucesso! Bem-vindo ao TechCuiabá!",
+          "success"
+        );
         closeModal("cadastroModal");
         this.reset();
       } else {
-        alert("Por favor, verifique seus dados e tente novamente.");
+        showToast(
+          "Por favor, verifique seus dados e tente novamente.",
+          "error"
+        );
       }
     });
   }
@@ -176,11 +247,11 @@ document.addEventListener("DOMContentLoaded", function () {
           email: email.value,
         };
         atualizarInterface();
-        alert("Login realizado com sucesso!");
+        showToast("Login realizado com sucesso!", "success");
         closeModal("loginModal");
         this.reset();
       } else {
-        alert("E-mail inválido!");
+        showToast("E-mail inválido!", "error");
       }
     });
   }
@@ -189,7 +260,10 @@ document.addEventListener("DOMContentLoaded", function () {
   if (esqueciSenhaLink) {
     esqueciSenhaLink.addEventListener("click", function (e) {
       e.preventDefault();
-      alert("Instruções de recuperação de senha enviadas para seu e-mail!");
+      showToast(
+        "Instruções de recuperação de senha enviadas para seu e-mail!",
+        "success"
+      );
     });
   }
 

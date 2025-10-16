@@ -831,3 +831,49 @@ footer {
     margin: 20px;
   }
 }
+
+/* Toast Styles */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  color: white;
+  padding: 16px 24px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3);
+  transform: translateX(120%);
+  transition: transform 0.3s ease-out;
+  z-index: 2000;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+}
+
+.toast-success {
+  background: #10b981;
+}
+
+.toast-error {
+  background: #ef4444;
+}
+
+.toast .material-symbols-outlined {
+  font-size: 1.5rem;
+}
+
+/* Responsive toast */
+@media (max-width: 768px) {
+  .toast {
+    bottom: 15px;
+    right: 15px;
+    left: 15px;
+    width: auto;
+    transform: translateY(120%);
+  }
+  
+  .toast.show {
+    transform: translateY(0);
+  }
+}

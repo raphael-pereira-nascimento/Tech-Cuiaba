@@ -26,6 +26,9 @@
           <label for="loginPassword">Senha</label>
           <input type="password" id="loginPassword" class="form-control" required>
         </div>
+      <button class="close-page-btn" onclick="window.history.back()">
+        <span class="material-symbols-outlined">close</span>
+      </button>
         <button type="submit" class="btn-primary">Entrar</button>
       </form>
       
@@ -40,26 +43,38 @@
     </button>
   </div>
 
-  <script src="script.js"></script>
-  <script>
-    // Login form specific functionality
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const email = document.getElementById('loginEmail').value;
-      
-      if (email.includes('@')) {
-        // In a real app, this would redirect or update localStorage
-        alert('Login realizado com sucesso!');
-        window.location.href = 'index.html';
-      } else {
-        alert('E-mail inválido!');
-      }
-    });
+<script src="script.js"></script>
+<script>
+  // Login form specific functionality
+  document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email = document.getElementById('loginEmail').value;
     
-    document.querySelector('.forgot-password-link').addEventListener('click', function(e) {
-      e.preventDefault();
-      alert('Instruções de recuperação enviadas para seu e-mail!');
-    });
-  </script>
+    if (email.includes('@')) {
+      showToast('Login realizado com sucesso!', 'success');
+      setTimeout(() => {
+        window.location.href = 'index.html';
+      }, 1500);
+    } else {
+      showToast('E-mail inválido!', 'error');
+    }
+  });
+  
+  document.querySelector('.forgot-password-link').addEventListener('click', function(e) {
+    e.preventDefault();
+    showToast('Instruções de recuperação enviadas para seu e-mail!', 'success');
+  });
+  
+  // Close button functionality
+  document.querySelector('.theme-toggle').addEventListener('click', function() {
+    const currentTheme = document.body.getAttribute('data-theme') || 'light';
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    document.body.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    
+    const icon = newTheme === 'dark' ? 'dark_mode' : 'light_mode';
+    this.innerHTML = `<span class="material-symbols-outlined">${icon}</span>`;
+  });
+</script>
 </body>
 </html>
