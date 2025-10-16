@@ -6,18 +6,15 @@ let usuarioAtual = {
 
 // Toast management
 function showToast(message, type = "success") {
-  // Remove existing toast
   const existingToast = document.getElementById("toast");
   if (existingToast) {
     existingToast.remove();
   }
 
-  // Create toast element
   const toast = document.createElement("div");
   toast.id = "toast";
   toast.className = `toast toast-${type}`;
 
-  // Set icon based on type
   const icon = type === "success" ? "check_circle" : "error";
   const color = type === "success" ? "#10b981" : "#ef4444";
 
@@ -26,7 +23,6 @@ function showToast(message, type = "success") {
     <span>${message}</span>
   `;
 
-  // Style the toast
   Object.assign(toast.style, {
     position: "fixed",
     bottom: "20px",
@@ -48,12 +44,10 @@ function showToast(message, type = "success") {
 
   document.body.appendChild(toast);
 
-  // Animate in
   setTimeout(() => {
     toast.style.transform = "translateX(0)";
   }, 100);
 
-  // Auto remove after 3 seconds
   setTimeout(() => {
     toast.style.transform = "translateX(120%)";
     setTimeout(() => {
@@ -68,7 +62,6 @@ function showToast(message, type = "success") {
 function setTheme(theme) {
   document.body.setAttribute("data-theme", theme);
   localStorage.setItem("theme", theme);
-
   const icon = theme === "dark" ? "dark_mode" : "light_mode";
   const themeToggle = document.getElementById("themeToggle");
   if (themeToggle) {
@@ -83,15 +76,22 @@ function initTheme() {
 
 // Atualizar interface
 function atualizarInterface() {
+  const userNameDisplay = document.getElementById("userNameDisplay");
+  const userEmailDisplay = document.getElementById("userEmailDisplay");
   const contaUserName = document.getElementById("contaUserName");
   const contaUserEmail = document.getElementById("contaUserEmail");
   const contaStatus = document.getElementById("contaStatus");
 
-  if (contaUserName) contaUserName.textContent = usuarioAtual.nome;
-  if (contaUserEmail) contaUserEmail.textContent = usuarioAtual.email;
+  const nome = usuarioAtual.nome;
+  const email = usuarioAtual.email;
+
+  if (userNameDisplay) userNameDisplay.textContent = nome;
+  if (userEmailDisplay) userEmailDisplay.textContent = email;
+  if (contaUserName) contaUserName.textContent = nome;
+  if (contaUserEmail) contaUserEmail.textContent = email;
 
   if (contaStatus) {
-    if (usuarioAtual.email !== "Não cadastrado") {
+    if (email !== "Não cadastrado") {
       contaStatus.textContent = "Inscrito ✓";
       contaStatus.style.color = "#10b981";
     } else {
@@ -124,11 +124,6 @@ function closeModal(modalId) {
   }
 }
 
-// Close modal function for external pages
-function closePage() {
-  window.history.back();
-}
-
 // Event listeners
 document.addEventListener("DOMContentLoaded", function () {
   // Theme toggle
@@ -141,17 +136,26 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Modal buttons
-  const openCadastroBtns = document.querySelectorAll('[id^="openCadastroBtn"]');
+  // Modal buttons - todos os botões de cadastro abrem o mesmo modal
+  const openCadastroBtns = [
+    document.getElementById("openCadastroBtn"),
+    document.getElementById("openCadastroBtn2"),
+    document.getElementById("openCadastroBtn3"),
+  ];
+
   openCadastroBtns.forEach((btn) => {
-    btn.addEventListener("click", () => openModal("cadastroModal"));
+    if (btn) {
+      btn.addEventListener("click", () => openModal("cadastroModal"));
+    }
   });
 
+  // Botão de login
   const openLoginBtn = document.getElementById("openLoginBtn");
   if (openLoginBtn) {
     openLoginBtn.addEventListener("click", () => openModal("loginModal"));
   }
 
+  // Botão de conta
   const openAccountBtn = document.getElementById("openAccountBtn");
   if (openAccountBtn) {
     openAccountBtn.addEventListener("click", () => {
@@ -166,17 +170,22 @@ document.addEventListener("DOMContentLoaded", function () {
     "closeLoginModal",
     "closeCadastroModal",
   ];
+
   closeButtons.forEach((id) => {
     const btn = document.getElementById(id);
     if (btn) {
-      btn.addEventListener("click", () =>
-        closeModal(id.replace("close", "").replace("Modal", "") + "Modal")
-      );
+      btn.addEventListener("click", () => {
+        const modalName = id.replace("close", "").replace("Modal", "");
+        closeModal(modalName + "Modal");
+      });
     }
   });
 
   // Navigation between modals
   const contaToLoginBtn = document.getElementById("contaToLoginBtn");
+  const loginToCadastroBtn = document.getElementById("loginToCadastroBtn");
+  const cadastroToLoginBtn = document.getElementById("cadastroToLoginBtn");
+
   if (contaToLoginBtn) {
     contaToLoginBtn.addEventListener("click", () => {
       closeModal("contaModal");
@@ -184,7 +193,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  const loginToCadastroBtn = document.getElementById("loginToCadastroBtn");
   if (loginToCadastroBtn) {
     loginToCadastroBtn.addEventListener("click", () => {
       closeModal("loginModal");
@@ -192,7 +200,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  const cadastroToLoginBtn = document.getElementById("cadastroToLoginBtn");
   if (cadastroToLoginBtn) {
     cadastroToLoginBtn.addEventListener("click", () => {
       closeModal("cadastroModal");
@@ -200,25 +207,56 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Form submissions
+  // Formulário de cadastro com validação melhorada
   const cadastroForm = document.getElementById("cadastroForm");
   if (cadastroForm) {
     cadastroForm.addEventListener("submit", function (e) {
       e.preventDefault();
+
       const nome = document.getElementById("cadastroNome");
       const email = document.getElementById("cadastroEmail");
       const password = document.getElementById("cadastroPassword");
+      const confirmPassword = document.getElementById(
+        "cadastroConfirmPassword"
+      );
 
-      if (
-        email &&
-        email.value.includes("@") &&
-        password &&
-        password.value.length >= 6
-      ) {
+      // Resetar bordas
+      [nome, email, password, confirmPassword].forEach((field) => {
+        if (field) field.style.borderColor = "";
+      });
+
+      let isValid = true;
+
+      // Validar nome
+      if (!nome.value.trim()) {
+        nome.style.borderColor = "#ef4444";
+        isValid = false;
+      }
+
+      // Validar e-mail
+      if (!email.value.trim() || !email.value.includes("@")) {
+        email.style.borderColor = "#ef4444";
+        isValid = false;
+      }
+
+      // Validar senha
+      if (password.value.length < 6) {
+        password.style.borderColor = "#ef4444";
+        isValid = false;
+      }
+
+      // Validar confirmação de senha
+      if (password.value !== confirmPassword.value) {
+        confirmPassword.style.borderColor = "#ef4444";
+        isValid = false;
+      }
+
+      if (isValid) {
         usuarioAtual = {
-          nome: nome.value,
-          email: email.value,
+          nome: nome.value.trim(),
+          email: email.value.trim(),
         };
+
         atualizarInterface();
         showToast(
           "Cadastro realizado com sucesso! Bem-vindo ao TechCuiabá!",
@@ -228,13 +266,14 @@ document.addEventListener("DOMContentLoaded", function () {
         this.reset();
       } else {
         showToast(
-          "Por favor, verifique seus dados e tente novamente.",
+          "Por favor, verifique todos os campos e tente novamente.",
           "error"
         );
       }
     });
   }
 
+  // Formulário de login
   const loginForm = document.getElementById("loginForm");
   if (loginForm) {
     loginForm.addEventListener("submit", function (e) {
@@ -256,6 +295,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // Esqueci minha senha
   const esqueciSenhaLink = document.getElementById("esqueciSenhaLink");
   if (esqueciSenhaLink) {
     esqueciSenhaLink.addEventListener("click", function (e) {
@@ -270,8 +310,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Close modals when clicking outside
   window.addEventListener("click", function (e) {
     if (e.target.classList.contains("modal")) {
-      const modalId = e.target.id;
-      closeModal(modalId);
+      e.target.style.display = "none";
     }
   });
 

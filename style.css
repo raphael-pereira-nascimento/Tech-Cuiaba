@@ -877,3 +877,34 @@ footer {
     transform: translateY(0);
   }
 }
+
+/* Form enhancements */
+.form-control::placeholder {
+  color: #94a3b8;
+}
+
+.form-section h3 {
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.form-section:last-child h3 {
+  border-bottom: none;
+  margin-bottom: 16px;
+}
+
+/* Responsive form */
+@media (max-width: 480px) {
+  .modal-content {
+    padding: 20px;
+  }
+  
+  .modal-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .modal-header p {
+    font-size: 0.95rem;
+  }
+}
