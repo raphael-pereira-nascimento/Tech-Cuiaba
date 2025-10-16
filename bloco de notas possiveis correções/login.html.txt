@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - TechCuiabá</title>
+  <link rel="stylesheet" href="login.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+</head>
+<body>
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <div class="logo">TechCuiabá</div>
+        <h2>Login</h2>
+        <p>Acesse sua conta no TechCuiabá</p>
+      </div>
+      
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="loginEmail">E-mail</label>
+          <input type="email" id="loginEmail" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Senha</label>
+          <input type="password" id="loginPassword" class="form-control" required>
+        </div>
+      <button class="close-page-btn" onclick="window.history.back()">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+        <button type="submit" class="btn-primary">Entrar</button>
+      </form>
+      
+      <div class="auth-footer">
+        <p>Não tem conta? <a href="cadastro.html">Cadastre-se</a></p>
+        <a href="#" class="forgot-password-link">Esqueci minha senha</a>
+      </div>
+    </div>
+    
+    <button class="theme-toggle" id="themeToggle">
+      <span class="material-symbols-outlined">light_mode</span>
+    </button>
+  </div>
+
+<script src="script.js"></script>
+<script>
+  // Login form specific functionality
+  document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email = document.getElementById('loginEmail').value;
+    
+    if (email.includes('@')) {
+      showToast('Login realizado com sucesso!', 'success');
+      setTimeout(() => {
+        window.location.href = 'index.html';
+      }, 1500);
+    } else {
+      showToast('E-mail inválido!', 'error');
+    }
+  });
+  
+  document.querySelector('.forgot-password-link').addEventListener('click', function(e) {
+    e.preventDefault();
+    showToast('Instruções de recuperação enviadas para seu e-mail!', 'success');
+  });
+  
+  // Close button functionality
+  document.querySelector('.theme-toggle').addEventListener('click', function() {
+    const currentTheme = document.body.getAttribute('data-theme') || 'light';
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    document.body.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    
+    const icon = newTheme === 'dark' ? 'dark_mode' : 'light_mode';
+    this.innerHTML = `<span class="material-symbols-outlined">${icon}</span>`;
+  });
+</script>
+</body>
+</html>
