@@ -213,3 +213,32 @@ document.addEventListener('DOMContentLoaded', function() {
   initTheme();
   atualizarInterface();
 });
+
+// Função para aplicar tema em páginas de autenticação
+function initAuthTheme() {
+  const savedTheme = localStorage.getItem('theme') || 'light';
+  document.body.setAttribute('data-theme', savedTheme);
+  
+  const icon = savedTheme === 'dark' ? 'dark_mode' : 'light_mode';
+  const themeToggle = document.getElementById('themeToggle');
+  if (themeToggle) {
+    themeToggle.innerHTML = `<span class="material-symbols-outlined">${icon}</span>`;
+    
+    themeToggle.addEventListener('click', function() {
+      const current = document.body.getAttribute('data-theme') || 'light';
+      const newTheme = current === 'light' ? 'dark' : 'light';
+      document.body.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      
+      const newIcon = newTheme === 'dark' ? 'dark_mode' : 'light_mode';
+      this.innerHTML = `<span class="material-symbols-outlined">${newIcon}</span>`;
+    });
+  }
+}
+
+// Chamar em páginas de autenticação
+if (window.location.pathname.includes('login.html') || 
+    window.location.pathname.includes('cadastro.html') || 
+    window.location.pathname.includes('conta.html')) {
+  document.addEventListener('DOMContentLoaded', initAuthTheme);
+}

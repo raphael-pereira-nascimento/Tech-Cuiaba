@@ -35,6 +35,9 @@
       </div>
     </div>
     
+    <button class="close-page-btn" onclick="window.history.back()">
+      <span class="material-symbols-outlined">close</span>
+    </button>
     <button class="theme-toggle" id="themeToggle">
       <span class="material-symbols-outlined">light_mode</span>
     </button>
@@ -42,13 +45,10 @@
 
   <script src="script.js"></script>
   <script>
-    // Login form specific functionality
     document.getElementById('loginForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const email = document.getElementById('loginEmail').value;
-      
       if (email.includes('@')) {
-        // In a real app, this would redirect or update localStorage
         alert('Login realizado com sucesso!');
         window.location.href = 'index.html';
       } else {
