@@ -857,3 +857,28 @@ footer {
 [data-theme="dark"] .footer-social .social-btn:hover {
   background: var(--primary-color);
 }
+
+/* Botão de fechar em páginas autônomas */
+.close-page-btn {
+  position: absolute;
+  top: 24px;
+  right: 84px;
+  width: 48px;
+  height: 48px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-color);
+  color: var(--text-color);
+  border: 2px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+.close-page-btn:hover {
+  background: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
