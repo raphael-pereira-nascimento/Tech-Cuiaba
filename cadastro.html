@@ -19,7 +19,6 @@
         <h2>Crie sua conta</h2>
         <p>Junte-se ao TechCuiabá e participe do maior evento de tecnologia do Centro-Oeste</p>
       </div>
-      
       <!-- Formulário de cadastro -->
       <form id="cadastroForm">
         <div class="form-section">
@@ -54,23 +53,20 @@
           Criar conta
         </button>
       </form>
-      
       <!-- Links de ação -->
       <div class="auth-actions">
         <p class="login-text">Já tem uma conta? <a href="login.html" class="login-link">Faça login</a></p>
         <a href="#" class="forgot-password-link">Esqueci minha senha</a>
       </div>
     </div>
-    
     <!-- Botões de controle -->
-    <button class="close-page-btn" onclick="window.history.back()" title="Fechar">
+    <button class="close-page-btn" onclick="window.location.href='index.html'" title="Fechar">
       <span class="material-symbols-outlined">close</span>
     </button>
     <button class="theme-toggle" id="themeToggle" title="Mudar tema">
       <span class="material-symbols-outlined">light_mode</span>
     </button>
   </div>
-
   <script src="script.js"></script>
   <script>
     // Cadastro form specific functionality
@@ -79,7 +75,6 @@
       const nome = document.getElementById('cadastroNome').value;
       const email = document.getElementById('cadastroEmail').value;
       const password = document.getElementById('cadastroPassword').value;
-      
       if (email.includes('@') && password.length >= 6) {
         localStorage.setItem('userEmail', email);
         localStorage.setItem('userName', nome);
@@ -91,12 +86,10 @@
         showToast('Por favor, verifique seus dados e tente novamente.');
       }
     });
-    
     document.querySelector('.forgot-password-link').addEventListener('click', function(e) {
       e.preventDefault();
       showToast('Instruções de recuperação enviadas para seu e-mail!');
     });
-    
     // Função de toast (reutilizável)
     function showToast(message) {
       const toast = document.createElement('div');
@@ -106,11 +99,9 @@
         <span>${message}</span>
       `;
       document.body.appendChild(toast);
-      
       setTimeout(() => {
         toast.classList.add('show');
       }, 100);
-      
       setTimeout(() => {
         toast.classList.remove('show');
         setTimeout(() => {
@@ -119,7 +110,6 @@
       }, 3000);
     }
   </script>
-  
   <style>
     /* Toast styles inline */
     .toast {
@@ -140,15 +130,12 @@
       font-weight: 500;
       font-family: 'Inter', sans-serif;
     }
-    
     .toast.show {
       transform: translateX(0);
     }
-    
     .toast .material-symbols-outlined {
       font-size: 20px;
     }
-    
     @media (max-width: 480px) {
       .toast {
         bottom: 16px;
@@ -157,7 +144,6 @@
         width: auto;
         transform: translateY(120%);
       }
-      
       .toast.show {
         transform: translateY(0);
       }

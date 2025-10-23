@@ -831,3 +831,29 @@ footer {
     margin: 20px;
   }
 }
+
+/* --- Correções para modo escuro no header --- */
+[data-theme="dark"] .header-right .btn-icon,
+[data-theme="dark"] .header-right .btn-primary {
+  color: #f1f5f9;
+  background-color: #1e293b;
+  border-color: #334155;
+}
+[data-theme="dark"] .header-right .btn-icon {
+  background-color: #334155;
+}
+[data-theme="dark"] .header-right .btn-icon:hover,
+[data-theme="dark"] .header-right .btn-primary:hover {
+  background-color: #475569;
+  color: white;
+}
+[data-theme="dark"] .header-right .btn-icon span {
+  color: #f1f5f9;
+}
+/* Ícones sociais no modo escuro */
+[data-theme="dark"] .footer-social .social-btn {
+  background: rgba(255, 255, 255, 0.15);
+}
+[data-theme="dark"] .footer-social .social-btn:hover {
+  background: var(--primary-color);
+}
