@@ -831,12 +831,3 @@ footer {
     margin: 20px;
   }
 }
-
-.btn-primary, .btn-outline {
-  text-decoration: none;
-  display: inline-block;
-  text-align: center;
-}
-.btn-primary:hover, .btn-outline:hover {
-  text-decoration: none;
-}
