@@ -882,3 +882,29 @@ footer {
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
+
+/* Garantir que os ícones fiquem centralizados e visíveis */
+.footer-social .social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  text-decoration: none;
+  transition: background 0.3s ease, transform 0.2s ease;
+  flex-shrink: 0;
+}
+.footer-social .social-btn:hover {
+  background: var(--primary-color);
+  transform: translateY(-2px);
+}
+.footer-social .social-btn .material-symbols-outlined {
+  font-size: 20px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
