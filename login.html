@@ -4,15 +4,30 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Login - TechCuiabá</title>
-  <link rel="stylesheet" href="login.css">
+  <!-- Estilos globais (obrigatório para tema e variáveis CSS) -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Estilos específicos da página de login -->
+  <link rel="stylesheet" href="css/login.css">
+  <!-- Fontes -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 </head>
 <body>
+  <!-- Header simples com botão de voltar e tema -->
+  <header class="auth-header-bar">
+    <button class="btn-icon" onclick="window.location.href='index.html'" aria-label="Voltar">
+      <i class="fas fa-arrow-left"></i>
+    </button>
+    <div class="logo">TechCuiabá</div>
+    <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+      <span class="material-symbols-outlined">light_mode</span>
+    </button>
+  </header>
+
   <div class="auth-container">
     <div class="auth-card">
       <div class="auth-header">
-        <div class="logo">TechCuiabá</div>
         <h2>Login</h2>
         <p>Acesse sua conta no TechCuiabá</p>
       </div>
@@ -32,16 +47,12 @@
         <a href="#" class="forgot-password-link">Esqueci minha senha</a>
       </div>
     </div>
-    <button class="close-page-btn" onclick="window.location.href='index.html'">
-      <span class="material-symbols-outlined">close</span>
-    </button>
-    <button class="theme-toggle" id="themeToggle">
-      <span class="material-symbols-outlined">light_mode</span>
-    </button>
   </div>
-  <script src="script.js"></script>
+
+  <!-- Scripts -->
+  <script src="js/script.js"></script>
   <script>
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
+    document.getElementById('loginForm')?.addEventListener('submit', function(e) {
       e.preventDefault();
       const email = document.getElementById('loginEmail').value;
       if (email.includes('@')) {
@@ -51,7 +62,8 @@
         alert('E-mail inválido!');
       }
     });
-    document.querySelector('.forgot-password-link').addEventListener('click', function(e) {
+
+    document.querySelector('.forgot-password-link')?.addEventListener('click', function(e) {
       e.preventDefault();
       alert('Instruções de recuperação enviadas para seu e-mail!');
     });
