@@ -77,6 +77,18 @@
 
   <!-- Scripts -->
   <script src="js/script.js"></script>
-  <script src="js/cadastro.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    document.getElementById('cadastroForm')?.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const nome = document.getElementById('cadastroNome').value;
+      const email = document.getElementById('cadastroEmail').value;
+      const password = document.getElementById('cadastroPassword').value;
+  
+      if (registerUser(nome, email, password)) {
+        setTimeout(() => window.location.href = 'login.html', 1500);
+      }
+    });
+  </script>
 </body>
 </html>

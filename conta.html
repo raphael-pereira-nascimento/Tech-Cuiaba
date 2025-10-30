@@ -106,19 +106,20 @@
     </div>
   </section>
 
-  <script src="script.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const contaUserName = document.getElementById('contaUserName');
-      const contaUserEmail = document.getElementById('contaUserEmail');
-      const contaStatus = document.getElementById('contaStatus');
-      
-      // Simular dados do usuário
-      contaUserName.textContent = 'João Silva';
-      contaUserEmail.textContent = 'joao.silva@email.com';
-      contaStatus.textContent = 'Inscrito ✓';
-      contaStatus.style.color = '#10b981';
-    });
-  </script>
+<script src="js/script.js"></script>
+<script src="js/auth.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // O redirecionamento já é feito pelo auth.js
+
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser) {
+      document.getElementById('contaUserName').textContent = currentUser.name;
+      document.getElementById('contaUserEmail').textContent = currentUser.email;
+      document.getElementById('contaStatus').textContent = 'Inscrito ✓';
+      document.getElementById('contaStatus').style.color = '#10b981';
+    }
+  });
+</script>
 </body>
 </html>
