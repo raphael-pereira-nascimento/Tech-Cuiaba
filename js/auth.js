@@ -125,3 +125,76 @@ redirectIfLoggedIn();
 redirectIfNotLoggedIn();
 }
 });
+
+// Sistema de autenticação com localStorage
+function showToast(message, isError = false) {
+  let toast = document.getElementById('global-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'global-toast';
+    toast.className = 'toast';
+    toast.innerHTML = `
+      <span class="material-symbols-outlined">${isError ? 'error' : 'check'}</span>
+      <span>${message}</span>
+    `;
+    document.body.appendChild(toast);
+  } else {
+    toast.querySelector('span:last-child').textContent = message;
+    toast.querySelector('.material-symbols-outlined').textContent = isError ? 'error' : 'check';
+  }
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+// Registrar usuário
+function registerUser(name, email, password) {
+  if (!name || !email.includes('@') || password.length < 6) return false;
+  const users = JSON.parse(localStorage.getItem('users')) || {};
+  if (users[email]) {
+    showToast('E-mail já cadastrado!', true);
+    return false;
+  }
+  users[email] = { name, password };
+  localStorage.setItem('users', JSON.stringify(users));
+  showToast('Conta criada com sucesso!');
+  return true;
+}
+
+// Fazer login
+function loginUser(email, password) {
+  const users = JSON.parse(localStorage.getItem('users')) || {};
+  const user = users[email];
+  if (user && user.password === password) {
+    localStorage.setItem('isLoggedIn', 'true');
+    localStorage.setItem('currentUser', JSON.stringify({ name: user.name, email }));
+    showToast('Login realizado com sucesso!');
+    return true;
+  } else {
+    showToast('E-mail ou senha incorretos.', true);
+    return false;
+  }
+}
+
+// Verificar login
+function checkAuth(redirectIfNotLoggedIn = false) {
+  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+  const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+
+  if (!isLoggedIn && redirectIfNotLoggedIn) {
+    if (confirm('Você precisa estar logado para acessar esta página. Ir para login?')) {
+      window.location.href = 'login.html';
+    } else {
+      window.location.href = 'index.html';
+    }
+    return null;
+  }
+
+  return isLoggedIn ? currentUser : null;
+}
+
+// Logout
+function logout() {
+  localStorage.removeItem('isLoggedIn');
+  localStorage.removeItem('currentUser');
+  showToast('Você saiu da sua conta.');
+}

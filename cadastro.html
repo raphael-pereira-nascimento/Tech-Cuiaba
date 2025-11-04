@@ -4,88 +4,59 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cadastro - TechCuiabá</title>
-  <!-- Estilos globais (obrigatório para tema e variáveis CSS) -->
   <link rel="stylesheet" href="css/style.css">
-  <!-- Estilos específicos da página de cadastro -->
   <link rel="stylesheet" href="css/cadastro.css">
-  <!-- Fontes -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
 </head>
 <body>
-  <!-- Header fixo -->
   <header class="auth-header-bar">
     <button class="btn-icon" onclick="window.location.href='index.html'" aria-label="Voltar">
       <span class="material-symbols-outlined">arrow_back</span>
     </button>
     <div class="logo">TechCuiabá</div>
-    <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+    <button class="theme-toggle" id="themeToggle">
       <span class="material-symbols-outlined">light_mode</span>
     </button>
   </header>
 
   <div class="auth-container">
     <div class="auth-card">
-      <!-- Cabeçalho com ícone -->
-      <!-- <div class="auth-icon">
-        <span class="material-symbols-outlined">person_add</span>
-      </div> -->
       <div class="auth-header">
         <h2>Crie sua conta</h2>
-        <p>Junte-se ao TechCuiabá e participe do maior evento de tecnologia do Centro-Oeste</p>
+        <p>Junte-se ao TechCuiabá 2025</p>
       </div>
-      <!-- Formulário de cadastro -->
       <form id="cadastroForm">
-        <div class="form-section">
-          <h3 class="section-title">Dados Pessoais</h3>
-          <div class="form-group">
-            <label for="cadastroNome">
-              <!-- <span class="material-symbols-outlined input-icon">person</span> -->
-              Nome Completo
-            </label>
-            <input type="text" id="cadastroNome" class="form-control" required placeholder="Seu nome completo">
-          </div>
-          <div class="form-group">
-            <label for="cadastroEmail">
-              <!-- <span class="material-symbols-outlined input-icon">email</span> -->
-              E-mail
-            </label>
-            <input type="email" id="cadastroEmail" class="form-control" required placeholder="seu@email.com">
-          </div>
+        <div class="form-group">
+          <label for="cadastroNome">Nome Completo</label>
+          <input type="text" id="cadastroNome" class="form-control" required placeholder="Seu nome">
         </div>
-        <div class="form-section">
-          <h3 class="section-title">Senha</h3>
-          <div class="form-group">
-            <label for="cadastroPassword">
-              <!-- <span class="material-symbols-outlined input-icon">lock</span> -->
-              Senha
-            </label>
-            <input type="password" id="cadastroPassword" class="form-control" required minlength="6" placeholder="Mínimo 6 caracteres">
-          </div>
+        <div class="form-group">
+          <label for="cadastroEmail">E-mail</label>
+          <input type="email" id="cadastroEmail" class="form-control" required placeholder="seu@email.com">
         </div>
-        <button type="submit" class="btn-primary">
-          <!-- <span class="material-symbols-outlined btn-icon">person_add</span> -->
-          Criar conta
-        </button>
+        <div class="form-group">
+          <label for="cadastroPassword">Senha</label>
+          <input type="password" id="cadastroPassword" class="form-control" required minlength="6" placeholder="Mínimo 6 caracteres">
+        </div>
+        <button type="submit" class="btn-primary">Criar Conta</button>
       </form>
-      <!-- Links de ação -->
-      <div class="auth-actions">
-        <p class="login-text">Já tem uma conta? <a href="login.html" class="login-link">Faça login</a></p>
+      <div class="auth-footer">
+        <p>Já tem conta? <a href="login.html">Faça login</a></p>
       </div>
     </div>
   </div>
 
-  <!-- Scripts -->
   <script src="js/script.js"></script>
   <script src="js/auth.js"></script>
   <script>
-    document.getElementById('cadastroForm')?.addEventListener('submit', function(e) {
+    document.getElementById('cadastroForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const nome = document.getElementById('cadastroNome').value;
       const email = document.getElementById('cadastroEmail').value;
-      const password = document.getElementById('cadastroPassword').value;
-  
-      if (registerUser(nome, email, password)) {
+      const senha = document.getElementById('cadastroPassword').value;
+
+      if (registerUser(nome, email, senha)) {
         setTimeout(() => window.location.href = 'login.html', 1500);
       }
     });
