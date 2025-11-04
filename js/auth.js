@@ -274,3 +274,49 @@ function handleAccountButtonClick(event) {
     window.location.href = 'login.html'; // pede login primeiro
   }
 }
+
+// js/auth.js — sistema de autenticação com toast
+
+// Função reutilizável de toast
+function showToast(message, isError = false) {
+  let toast = document.getElementById('global-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'global-toast';
+    toast.className = 'toast';
+    toast.innerHTML = `
+      <span class="material-symbols-outlined">${isError ? 'error' : 'check'}</span>
+      <span>${message}</span>
+    `;
+    document.body.appendChild(toast);
+  } else {
+    toast.querySelector('span:last-child').textContent = message;
+    toast.querySelector('.material-symbols-outlined').textContent = isError ? 'error' : 'check';
+  }
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+// Verifica se usuário está logado
+function isLoggedIn() {
+  return localStorage.getItem('isLoggedIn') === 'true';
+}
+
+// Logout correto
+function logout() {
+  localStorage.removeItem('isLoggedIn');
+  localStorage.removeItem('currentUser');
+  // Opcional: limpar todos os usuários (não recomendado em produção real)
+  // localStorage.removeItem('users');
+  showToast('Você saiu da sua conta.');
+}
+
+// Ação inteligente para botões de login/cadastro
+function handleAuthButton(event, targetPage) {
+  event.preventDefault();
+  if (isLoggedIn()) {
+    showToast('Você já está logado!', false);
+    return;
+  }
+  window.location.href = targetPage;
+}
