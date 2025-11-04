@@ -49,6 +49,12 @@ function showToast(message, type = "success") {
   toast.classList.add("show");
   setTimeout(() => toast.classList.remove("show"), 3000);
 }
+function handleLogout() {
+  localStorage.removeItem('isLoggedIn');
+  localStorage.removeItem('currentUser');
+  showToast('Você saiu da sua conta com sucesso!');
+  setTimeout(() => window.location.href = 'index.html', 1500);
+}
 
 // Inicialização global
 document.addEventListener("DOMContentLoaded", () => {
