@@ -529,9 +529,18 @@ nav a:hover::after {
   box-shadow: var(--shadow-lg);
 }
 
+.contact-map {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  height: 100%;
+  min-height: 300px; 
+}
+
 .contact-map img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   display: block;
 }
 
