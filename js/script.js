@@ -65,3 +65,39 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.addEventListener("click", toggleTheme);
   });
 });
+
+function showToast(message, isError = false) {
+  let toast = document.getElementById('global-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'global-toast';
+    toast.className = 'toast';
+    toast.innerHTML = `
+      <span class="material-symbols-outlined">${isError ? 'error' : 'check'}</span>
+      <span>${message}</span>
+    `;
+    document.body.appendChild(toast);
+  }
+  toast.querySelector('span:last-child').textContent = message;
+  toast.querySelector('.material-symbols-outlined').textContent = isError ? 'error' : 'check';
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+function showToast(message, isError = false) {
+  let toast = document.getElementById('global-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'global-toast';
+    toast.className = 'toast';
+    toast.innerHTML = `
+      <span class="material-symbols-outlined">${isError ? 'error' : 'check'}</span>
+      <span>${message}</span>
+    `;
+    document.body.appendChild(toast);
+  }
+  toast.querySelector('span:last-child').textContent = message;
+  toast.querySelector('.material-symbols-outlined').textContent = isError ? 'error' : 'check';
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}

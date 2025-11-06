@@ -202,60 +202,17 @@
 
   <script src="js/script.js"></script>
   <script src="js/auth.js"></script>
-  <script>
-    // Função reutilizável de toast (caso não esteja em script.js)
-    function showToast(message) {
-      let toast = document.getElementById('global-toast');
-      if (!toast) {
-        toast = document.createElement('div');
-        toast.id = 'global-toast';
-        toast.className = 'toast';
-        toast.innerHTML = `
-          <span class="material-symbols-outlined">check</span>
-          <span>${message}</span>
-        `;
-        document.body.appendChild(toast);
-      } else {
-        document.getElementById('toast-message').textContent = message;
-      }
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 3000);
-    }
-
-    // Logout com toast
-    function handleLogout() {
-      // Remove os dados de login
-      localStorage.removeItem('isLoggedIn');
-      localStorage.removeItem('currentUser');
-      localStorage.removeItem('users'); // opcional: limpa todos os usuários
-
-      // Mostra toast
-      showToast('Você saiu da sua conta com sucesso!');
-
-      // Redireciona após um breve delay
-      setTimeout(() => {
-        window.location.href = 'index.html';
-      }, 1500);
-    }
-
-    // Verifica se está logado ao carregar a página
+    <script>
     document.addEventListener('DOMContentLoaded', function() {
       const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
       const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
 
       if (!isLoggedIn || !currentUser) {
-        showToast('Sessão expirada. Faça login novamente.');
+        showToast('Faça login para acessar sua conta.', true);
         setTimeout(() => window.location.href = 'login.html', 2000);
         return;
       }
 
-      // Verifica login ao carregar
-      if (!isLoggedIn()) {
-        showToast('Faça login para acessar sua conta.', true);
-        setTimeout(() => window.location.href = 'login.html', 2000);
-      }
-
-      // Preenche os dados reais
       document.getElementById('contaUserName').textContent = currentUser.name;
       document.getElementById('contaUserEmail').textContent = currentUser.email;
       document.getElementById('contaStatus').textContent = 'Inscrito ✓';

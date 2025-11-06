@@ -1,15 +1,18 @@
 document.getElementById('loginForm')?.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const email = document.getElementById('loginEmail').value;
-    if (email.includes('@')) {
-    alert('Login realizado com sucesso!');
-    window.location.href = 'index.html';
-    } else {
-    alert('E-mail inválido!');
-    }
-});
+  e.preventDefault();
+  const email = document.getElementById('loginEmail').value;
+  const password = document.getElementById('loginPassword').value;
 
-document.querySelector('.forgot-password-link')?.addEventListener('click', function(e) {
-    e.preventDefault();
-    alert('Instruções de recuperação enviadas para seu e-mail!');
+  const users = JSON.parse(localStorage.getItem('users')) || {};
+  const user = users[email];
+
+  if (user && user.password === password) {
+    // ✅ MARCAR COMO LOGADO
+    localStorage.setItem('isLoggedIn', 'true');
+    localStorage.setItem('currentUser', JSON.stringify({ name: user.name, email: email }));
+    showToast('Login realizado com sucesso!');
+    setTimeout(() => window.location.href = 'index.html', 1500);
+  } else {
+    showToast('E-mail ou senha incorretos.', 'error');
+  }
 });
