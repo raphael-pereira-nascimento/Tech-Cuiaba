@@ -184,7 +184,7 @@
 
           <!-- Ações -->
           <div style="text-align: center; margin-top: 32px;">
-            <button class="logout-btn" onclick="logoutAndRedirect()">
+            <button class="logout-btn" onclick="logout(); setTimeout(() => window.location.href = 'index.html', 1000);">
               <span class="material-symbols-outlined">logout</span>
               Sair da Conta
             </button>
@@ -200,8 +200,8 @@
   </section>
 
 
-  <script src="js/auth.js"></script>
   <script src="js/script.js"></script>
+  <script src="js/auth.js"></script>
   <script>
     // Função reutilizável de toast (caso não esteja em script.js)
     function showToast(message) {
@@ -249,6 +249,12 @@
         return;
       }
 
+      // Verifica login ao carregar
+      if (!isLoggedIn()) {
+        showToast('Faça login para acessar sua conta.', true);
+        setTimeout(() => window.location.href = 'login.html', 2000);
+      }
+
       // Preenche os dados reais
       document.getElementById('contaUserName').textContent = currentUser.name;
       document.getElementById('contaUserEmail').textContent = currentUser.email;
@@ -256,5 +262,25 @@
       document.getElementById('contaStatus').style.color = '#10b981';
     });
   </script>
+  <style>
+  .logout-btn {
+    background: transparent;
+    color: #ef4444;
+    border: 2px solid #ef4444;
+    padding: 12px 28px;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+  }
+  .logout-btn:hover {
+    background: #fee2e2;
+    transform: translateY(-2px);
+  }
+</style>
 </body>
 </html>

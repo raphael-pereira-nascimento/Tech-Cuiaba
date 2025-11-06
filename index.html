@@ -28,6 +28,7 @@
         <a href="conta.html" class="btn-icon" title="Minha Conta" aria-label="Minha Conta">
           <span class="material-symbols-outlined">account_circle</span>
         </a>
+        <button class="btn-primary" onclick="handleAuthButton(event, 'login.html')">Login</button>
         <a href="login.html" class="btn-primary">Login</a>
       </div>
     </div>
@@ -40,6 +41,7 @@
         <div class="hero-text">
           <h1>TechCuiabá 2025</h1>
           <p>O maior evento de tecnologia e inovação do Centro-Oeste chega a Cuiabá com palestras internacionais, workshops práticos e networking de alto nível!</p>
+          <button class="btn-primary" onclick="handleAuthButton(event, 'cadastro.html')">Inscreva-se Agora</button>
           <a href="cadastro.html" class="btn-primary">Inscreva-se Agora</a>
         </div>
         <div class="hero-image">
@@ -108,6 +110,7 @@
                 <span>08:00 - 18:00</span>
               </div>
             </div>
+            <button class="btn-outline" onclick="handleAuthButton(event, 'cadastro.html')">Inscreva-se</button>
             <a href="cadastro.html" class="btn-outline">Inscreva-se</a>
           </div>
         </div>
@@ -132,6 +135,7 @@
                 <span>14:00 - 18:00</span>
               </div>
             </div>
+            <button class="btn-outline" onclick="handleAuthButton(event, 'cadastro.html')">Inscreva-se</button>
             <a href="cadastro.html" class="btn-outline">Inscreva-se</a>
           </div>
         </div>
@@ -245,6 +249,48 @@
   <script>
     // Vincular o botão "Minha Conta" à lógica inteligente
     document.getElementById('openAccountBtn').addEventListener('click', handleAccountButtonClick);
+      // Verifica se está logado
+  function isLoggedIn() {
+    return localStorage.getItem('isLoggedIn') === 'true';
+  }
+
+  // Mostra toast e impede navegação se já logado
+  function handleAuthClick(event) {
+    if (isLoggedIn()) {
+      showToast('Você já está logado!', 'error');
+      return false; // impede o clique
+    }
+    return true; // permite navegação
+  }
+
+  // Função de toast (reutilizável)
+  function showToast(message, isError = false) {
+    let toast = document.getElementById('global-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'global-toast';
+      toast.className = 'toast';
+      toast.innerHTML = `
+        <span class="material-symbols-outlined">${isError ? 'error' : 'check'}</span>
+        <span>${message}</span>
+      `;
+      document.body.appendChild(toast);
+    } else {
+      toast.querySelector('span:last-child').textContent = message;
+      toast.querySelector('.material-symbols-outlined').textContent = isError ? 'error' : 'check';
+    }
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3000);
+  }
+
+  // Botão "Minha Conta"
+  document.getElementById('openAccountBtn').addEventListener('click', function() {
+    if (isLoggedIn()) {
+      window.location.href = 'conta.html';
+    } else {
+      window.location.href = 'login.html';
+    }
+  });
   </script>
 </body>
 </html>
