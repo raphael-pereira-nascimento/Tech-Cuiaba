@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Favoritos - TechCuiabá</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+  <style>
+    .favorites-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 32px;
+      margin-top: 40px;
+    }
+    .favorite-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: var(--shadow-md);
+    }
+    .empty-favorites {
+      text-align: center;
+      padding: 40px;
+      color: #64748b;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-content">
+      <div class="logo">TechCuiabá</div>
+      <nav><ul><li><a href="produtos.html">Produtos</a></li></ul></nav>
+      <div class="header-right">
+        <button class="theme-toggle" id="themeToggle">
+          <span class="material-symbols-outlined">light_mode</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Seus Favoritos</h2>
+      <div id="favoritesContainer">
+        <!-- Favoritos carregados por JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <script src="js/script.js"></script>
+  <script src="js/store.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const favorites = getFavorites();
+      const container = document.getElementById('favoritesContainer');
+      
+      if (favorites.length === 0) {
+        container.innerHTML = '<div class="empty-favorites">Nenhum produto favoritado.</div>';
+        return;
+      }
+
+      // Reutiliza o array de produtos do store.js
+      const favProducts = products.filter(p => favorites.includes(p.id));
+      const html = favProducts.map(p => `
+        <div class="favorite-card">
+          <strong>${p.name}</strong><br>
+          R$ ${p.price.toFixed(2).replace('.', ',')}
+          <br><br>
+          <button class="btn-outline" onclick="addToCart(${p.id})">Adicionar ao Carrinho</button>
+        </div>
+      `).join('');
+
+      container.innerHTML = html;
+    });
+  </script>
+</body>
+</html>
