@@ -10,7 +10,7 @@
   <style>
     .products-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 32px;
       margin-top: 40px;
     }
@@ -26,23 +26,25 @@
       box-shadow: var(--shadow-lg);
     }
     .product-image {
-      height: 200px;
       width: 100%;
-      object-fit: cover;
+      height: 220px;
+      object-fit: cover; /* ← Essencial para não distorcer */
+      border-top-left-radius: var(--radius-lg);
+      border-top-right-radius: var(--radius-lg);
     }
     .product-info {
       padding: 20px;
     }
     .product-title {
-      font-size: 1.25rem;
+      font-size: 1.3rem; /* ↑ levemente maior */
       font-weight: 600;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
       color: var(--text-color);
     }
     .product-price {
       font-weight: 700;
       color: var(--primary-color);
-      font-size: 1.25rem;
+      font-size: 1.3rem; /* ↑ maior */
       margin: 8px 0;
     }
     .product-actions {
@@ -51,16 +53,16 @@
       margin-top: 16px;
     }
     .btn-sm {
-      padding: 8px 16px;
-      font-size: 0.9rem;
+      padding: 10px 18px; /* ↑ levemente maior */
+      font-size: 0.95rem;
     }
     .favorite-btn {
       background: transparent;
       border: 2px solid var(--primary-color);
       color: var(--primary-color);
       border-radius: var(--radius-full);
-      width: 40px;
-      height: 40px;
+      width: 48px; /* ↑ de 40px */
+      height: 48px; /* ↑ de 40px */
       display: flex;
       align-items: center;
       justify-content: center;
@@ -70,6 +72,9 @@
     .favorite-btn.active {
       background: var(--primary-color);
       color: white;
+    }
+    .material-symbols-outlined {
+      font-size: 24px; /* ↑ ícone maior */
     }
   </style>
 </head>

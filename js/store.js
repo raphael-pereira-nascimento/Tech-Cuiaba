@@ -1,11 +1,16 @@
-// js/store.js — sistema de loja com localStorage
-
-// Produtos de exemplo (use imagens reais na pasta img/)
 const products = [
-  { id: 1, name: 'Camiseta TechCuiabá 2025', price: 79.90, image: 'img/camiseta.jpg' },
-  { id: 2, name: 'Caneca Premium', price: 49.90, image: 'img/caneca.jpg' },
-  { id: 3, name: 'Adesivo Pack', price: 29.90, image: 'img/adesivos.jpg' },
-  { id: 4, name: 'Ingresso VIP', price: 350.00, image: 'img/ingresso.jpg' }
+  { id: 1, name: 'Camiseta TechCuiabá 2025', price: 79.90, image: 'img/camisa-techcuiabá.png' },
+  { id: 2, name: 'Caneca Premium', price: 49.90, image: 'img/caneca-techcuiabá.png' },
+  { id: 3, name: 'Adesivo Pack', price: 29.90, image: 'img/adesivos-techcuiabá.png' },
+  { id: 4, name: 'Ingresso VIP', price: 350.00, image: 'img/ingresso-vip.png' },
+  { id: 5, name: 'Mochila Tech', price: 129.90, image: 'img/mochila.jpg' },
+  { id: 6, name: 'Power Bank 10000mAh', price: 89.90, image: 'img/powerbank.jpg' },
+  { id: 7, name: 'Mouse Gamer RGB', price: 119.90, image: 'img/mouse.jpg' },
+  { id: 8, name: 'Notebook Stand', price: 59.90, image: 'img/stand.jpg' },
+  { id: 9, name: 'Kit Caneta Tech', price: 35.00, image: 'img/canetas.jpg' },
+  { id: 10, name: 'Boné Personalizado', price: 45.00, image: 'img/bone.jpg' },
+  { id: 11, name: 'Caneca de Barro Artesanal', price: 65.00, image: 'img/caneca-barro.jpg' },
+  { id: 12, name: 'Badge TechCuiabá 2025 (NFC)', price: 25.00, image: 'img/badge-nfc.jpg' }
 ];
 
 // Funções de armazenamento
@@ -56,7 +61,7 @@ function toggleFavorite(productId) {
   if (typeof renderProducts === 'function') renderProducts();
 }
 
-// Renderização (usada em produtos.html)
+// Renderização
 function renderProducts() {
   const container = document.getElementById('productsContainer');
   if (!container) return;
@@ -82,7 +87,7 @@ function renderProducts() {
   `).join('');
 }
 
-// Função de toast (reutiliza script.js ou fallback)
+// Toast
 function showToast(message) {
   let toast = document.getElementById('global-toast');
   if (!toast) {
@@ -98,4 +103,25 @@ function showToast(message) {
   toast.querySelector('span:last-child').textContent = message;
   toast.classList.add('show');
   setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+// Remover item do carrinho
+function removeFromCart(index) {
+  let cart = getCart();
+  cart.splice(index, 1);
+  saveCart(cart);
+  showToast('Item removido do carrinho.');
+  setTimeout(() => window.location.reload(), 300);
+}
+
+// Desfavoritar produto
+function unfavorite(productId) {
+  let favorites = getFavorites();
+  const index = favorites.indexOf(productId);
+  if (index !== -1) {
+    favorites.splice(index, 1);
+    saveFavorites(favorites);
+    showToast('Removido dos favoritos.');
+    setTimeout(() => window.location.reload(), 300);
+  }
 }
