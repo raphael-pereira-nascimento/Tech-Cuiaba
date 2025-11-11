@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Produtos - TechCuiabá</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+  <style>
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 32px;
+      margin-top: 40px;
+    }
+    .product-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: transform 0.3s ease;
+    }
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+    }
+    .product-image {
+      height: 200px;
+      width: 100%;
+      object-fit: cover;
+    }
+    .product-info {
+      padding: 20px;
+    }
+    .product-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-color);
+    }
+    .product-price {
+      font-weight: 700;
+      color: var(--primary-color);
+      font-size: 1.25rem;
+      margin: 8px 0;
+    }
+    .product-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .btn-sm {
+      padding: 8px 16px;
+      font-size: 0.9rem;
+    }
+    .favorite-btn {
+      background: transparent;
+      border: 2px solid var(--primary-color);
+      color: var(--primary-color);
+      border-radius: var(--radius-full);
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .favorite-btn.active {
+      background: var(--primary-color);
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-content">
+      <div class="logo">TechCuiabá</div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="produtos.html">Produtos</a></li>
+          <li><a href="carrinho.html">Carrinho</a></li>
+          <li><a href="favoritos.html">Favoritos</a></li>
+        </ul>
+      </nav>
+      <div class="header-right">
+        <button class="theme-toggle" id="themeToggle">
+          <span class="material-symbols-outlined">light_mode</span>
+        </button>
+        <a href="conta.html" class="btn-icon" title="Minha Conta">
+          <span class="material-symbols-outlined">account_circle</span>
+        </a>
+        <a href="login.html" class="btn-primary">Login</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Produtos Exclusivos</h2>
+      <p class="section-subtitle">Camisetas, canecas, ingressos e mais para você levar o TechCuiabá para casa!</p>
+      <div class="products-grid" id="productsContainer">
+        <!-- Produtos carregados por JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <script src="js/script.js"></script>
+  <script src="js/store.js"></script>
+  <script>
+    renderProducts();
+  </script>
+</body>
+</html>
