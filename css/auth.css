@@ -1,0 +1,179 @@
+/* auth.css — Estilos reutilizáveis para todas as páginas de autenticação */
+:root {
+  --auth-bg: linear-gradient(135deg, var(--bg-color) 0%, var(--secondary-color) 100%);
+  --auth-card-bg: var(--card-bg);
+  --auth-radius: var(--radius-xl);
+  --auth-shadow: var(--shadow-lg);
+}
+
+body.auth-page {
+  background: var(--auth-bg);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  font-family: 'Inter', sans-serif;
+}
+
+.auth-container {
+  width: 100%;
+  max-width: 450px;
+  position: relative;
+}
+
+.auth-card {
+  background: var(--auth-card-bg);
+  padding: 48px;
+  border-radius: var(--auth-radius);
+  box-shadow: var(--auth-shadow);
+  position: relative;
+}
+
+/* Header do card */
+.auth-header h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.875rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 16px 0 12px;
+  color: var(--text-color);
+}
+
+.auth-header p {
+  text-align: center;
+  color: #64748b;
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+/* Formulário */
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.form-control {
+  width: 100%;
+  padding: 16px;
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Seções no cadastro */
+.form-section {
+  margin-bottom: 32px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.form-section:last-child {
+  border-bottom: none;
+  margin-bottom: 24px;
+  padding-bottom: 0;
+}
+
+.form-section h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: var(--primary-color);
+}
+
+/* Botões */
+.btn-primary {
+  width: 100%;
+  padding: 18px;
+  font-size: 1.125rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+}
+
+/* Rodapé com links */
+.auth-footer {
+  text-align: center;
+  margin-top: 24px;
+  color: #64748b;
+  font-size: 0.9375rem;
+}
+
+.auth-footer a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+
+.forgot-password-link {
+  display: block;
+  text-align: center;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  margin-top: 16px;
+}
+
+.forgot-password-link:hover {
+  text-decoration: underline;
+}
+
+/* Header fixo em páginas autônomas */
+.auth-header-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background: var(--bg-color);
+  box-shadow: var(--shadow-sm);
+  z-index: 10;
+  backdrop-filter: blur(10px);
+}
+
+.auth-header-bar .logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Ajuste de margem no conteúdo */
+.auth-container {
+  margin-top: 80px;
+}
+
+/* Responsivo */
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 32px 24px;
+  }
+  .auth-header h2 {
+    font-size: 1.5rem;
+  }
+}
