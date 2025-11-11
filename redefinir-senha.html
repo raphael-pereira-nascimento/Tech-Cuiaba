@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Redefinir Senha - TechCuiabá</title>
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+</head>
+<body class="auth-page">
+  <header class="auth-header-bar">
+    <button class="btn-icon" onclick="window.location.href='login.html'" aria-label="Voltar">
+      <span class="material-symbols-outlined">arrow_back</span>
+    </button>
+    <div class="logo">TechCuiabá</div>
+    <button class="theme-toggle" id="themeToggle">
+      <span class="material-symbols-outlined">light_mode</span>
+    </button>
+  </header>
+
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <h2>Redefinir Senha</h2>
+        <p>Informe seu e-mail cadastrado e enviaremos um link para redefinir sua senha.</p>
+      </div>
+      <form id="resetForm">
+        <div class="form-group">
+          <label for="resetEmail">E-mail</label>
+          <input type="email" id="resetEmail" class="form-control" required placeholder="seu@email.com">
+        </div>
+        <button type="submit" class="btn-primary">Enviar Link</button>
+      </form>
+      <div class="auth-footer">
+        <p><a href="login.html">Voltar para o login</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+  <script>
+    document.getElementById('resetForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('resetEmail').value;
+      const users = JSON.parse(localStorage.getItem('users')) || {};
+      
+      if (users[email]) {
+        // Em modo offline, simulamos o envio
+        alert('Link de redefinição enviado para seu e-mail!');
+        window.location.href = 'login.html';
+      } else {
+        alert('Nenhuma conta encontrada com esse e-mail.');
+      }
+    });
+  </script>
+</body>
+</html>
