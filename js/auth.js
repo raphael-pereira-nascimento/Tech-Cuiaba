@@ -320,3 +320,15 @@ function handleAuthButton(event, targetPage) {
   }
   window.location.href = targetPage;
 }
+
+// Em auth.js
+function sendPasswordReset(email) {
+  const users = JSON.parse(localStorage.getItem('users')) || {};
+  if (users[email]) {
+    showToast('Link de redefinição enviado para seu e-mail!');
+    return true;
+  } else {
+    showToast('E-mail não encontrado.', true);
+    return false;
+  }
+}
