@@ -5,12 +5,12 @@ const products = [
   { id: 4, name: 'Ingresso VIP', price: 350.00, image: 'img/ingresso-vip.png' },
   { id: 5, name: 'Mochila Tech', price: 129.90, image: 'img/mochila-techcuiabá.png' },
   { id: 6, name: 'Power Bank 10000mAh', price: 89.90, image: 'img/powerbank-techcuiabá.png' },
-  { id: 7, name: 'Mouse Gamer RGB', price: 119.90, image: 'img/mouse.jpg' },
-  { id: 8, name: 'Notebook Stand', price: 59.90, image: 'img/stand.jpg' },
-  { id: 9, name: 'Kit Caneta Tech', price: 35.00, image: 'img/canetas.jpg' },
-  { id: 10, name: 'Boné Personalizado', price: 45.00, image: 'img/bone.jpg' },
-  { id: 11, name: 'Caneca de Barro Artesanal', price: 65.00, image: 'img/caneca-barro.jpg' },
-  { id: 12, name: 'Badge TechCuiabá 2025 (NFC)', price: 25.00, image: 'img/badge-nfc.jpg' }
+  { id: 7, name: 'Mouse Gamer RGB', price: 119.90, image: 'img/mousegamer-techcuiabá.png' },
+  { id: 8, name: 'Notebook Stand', price: 59.90, image: 'img/notebook-techcuiabá.png' },
+  { id: 9, name: 'Kit Caneta Tech', price: 35.00, image: 'img/caneta-techcuiabá.png' },
+  { id: 10, name: 'Boné Personalizado', price: 45.00, image: 'img/boné-techcuiabá.png' },
+  { id: 11, name: 'Caneca de Barro Artesanal', price: 65.00, image: 'img/caneca-barro-techcuiabá.png' },
+  { id: 12, name: 'Badge TechCuiabá 2025 (NFC)', price: 25.00, image: 'img/badge-nfc-techcuiabá.png' }
 ];
 
 // Funções de armazenamento
