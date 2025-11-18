@@ -1,25 +1,31 @@
+// js/cadastro.js
 document.getElementById('cadastroForm')?.addEventListener('submit', function(e) {
   e.preventDefault();
-  const nome = document.getElementById('cadastroNome').value;
-  const email = document.getElementById('cadastroEmail').value;
+  
+  const nome = document.getElementById('cadastroNome').value.trim();
+  const email = document.getElementById('cadastroEmail').value.trim();
   const password = document.getElementById('cadastroPassword').value;
 
+  // Validação
   if (!nome || !email.includes('@') || password.length < 6) {
-    showToast('Preencha todos os campos corretamente.', 'error');
+    showToast('Preencha todos os campos corretamente.', true);
     return;
   }
 
+  // Carrega usuários existentes
   const users = JSON.parse(localStorage.getItem('users')) || {};
+  
+  // Verifica duplicidade
   if (users[email]) {
-    showToast('E-mail já cadastrado!', 'error');
+    showToast('E-mail já cadastrado!', true);
     return;
   }
 
-  // ✅ Salvar usuário
+  // ✅ Salva usuário
   users[email] = { name: nome, password: password };
   localStorage.setItem('users', JSON.stringify(users));
 
-  // ✅ MARCAR COMO LOGADO
+  // ✅ Define como logado
   localStorage.setItem('isLoggedIn', 'true');
   localStorage.setItem('currentUser', JSON.stringify({ name: nome, email: email }));
 
