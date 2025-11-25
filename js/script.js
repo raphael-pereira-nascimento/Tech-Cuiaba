@@ -1,3 +1,4 @@
+// js/script.js
 function applyTheme() {
   const theme = localStorage.getItem('theme') || 'light';
   document.documentElement.setAttribute('data-theme', theme);
@@ -34,18 +35,6 @@ function showToast(message, isError = false) {
   toast.querySelector('span:last-child').textContent = message;
   toast.classList.add('show');
   setTimeout(() => toast.classList.remove('show'), 3000);
-}
-
-// Verifica se está logado
-function isLoggedIn() {
-  return localStorage.getItem('isLoggedIn') === 'true';
-}
-
-// Logout
-function logout() {
-  localStorage.removeItem('isLoggedIn');
-  localStorage.removeItem('currentUser');
-  showToast('Você saiu da sua conta.');
 }
 
 // Inicialização
